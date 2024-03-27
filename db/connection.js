@@ -5,7 +5,12 @@ const pool = new Pool({
     password: process.env.PASSWORD,
     host: "localhost",
     port: 5432,
-    database: "task_db"
+    database: "tasks_db"
 })
 
-module.exports = pool;
+pool.on("connect", () => {
+    console.log("connected to the task_db database");
+});
+
+
+module.exports = { pool };
