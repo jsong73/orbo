@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
             "INSERT INTO users(name, email, hash_password) VALUES ($1, $2, $3) RETURNING id",
             [name, email, hashPW]
         );
-        res.json({ message: "user successfully registered", newUser})
+        res.json({ message: "User successfully registered", newUser})
 
     } catch(error) {
 
@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
 
             //for select query use res.rows.length to check for empty query response
             if(user.rows.length === 0){
-                return res.json({ message: "no user exists"})
+                return res.json({ message: "No user exists"})
             }
 
         const isPasswordValid = await bcrypt.compare(password, user.rows[0].hash_password);
