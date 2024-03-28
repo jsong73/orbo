@@ -4,7 +4,7 @@ import Nav from "../components/Nav"
 function Home() {
   return (
     <div> 
-        Home
+        {/* Home */}
         <Nav />
     </div>
   )
