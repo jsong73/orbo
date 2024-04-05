@@ -5,32 +5,37 @@ export const AuthContext = createContext();
 
 export const useAuth = () => {
     const context = useContext(AuthContext);
-    console.log("context:", context)
     if(!context) {
-        throw new Error("useAuth must be used within AuthProvider");
+        throw new Error("useAuth is out of scope");
     }
     return context;
 }
 
 export function AuthProvider({children}) {
+    // const [isLoggedIn, setLoggedIn] = useState(false);
+    const [user, isUser]=useState(null)
+    const [error, setError]= useState("")
+    
 
     const baseURL= "http://localhost:3001";
 
-    const login = async(data) => {
-        try{
+    const login = async (data) => {
+        try {
             const res = await axios.post(`${baseURL}/login`, data);
+            isUser(res.data);
             console.log("res", res.data)
             return res.data;
+        } catch (error) {
+            console.log("err", error.response.data.message)
+            setError(error.response.data.message)
 
-        }catch(error){
-            console.log(error)
-            throw error;
         }
     }
-
     return(
-        <AuthContext.Provider value={{ login }}>
+        
+        <AuthContext.Provider value={{ login, user, error }}>
             {children}
         </AuthContext.Provider>
+
     )
 }

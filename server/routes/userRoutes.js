@@ -34,13 +34,13 @@ router.post("/login", async (req, res) => {
 
             //for select query use res.rows.length to check for empty query response
             if(user.rows.length === 0){
-                return res.json({ message: "No user exists"})
+                return res.status(401).json({ message: "No user exists"})
             }
 
         const isPasswordValid = await bcrypt.compare(password, user.rows[0].hash_password);
 
         if(!isPasswordValid){
-            return res.json({ message: "Invalid credentials"});
+            return res.status(401).json({ message: "Invalid credentials"});
         }
 
         const token = jwt.sign({ userId: user.rows[0].id }, process.env.SECRET);
