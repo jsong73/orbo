@@ -1,22 +1,51 @@
-import React from "react";
-import {Link} from "react-router-dom";
-
+import React , {useState} from "react";
+import { useNavigate, Link} from "react-router-dom";
+import { useAuth } from "../../context/auth"
 
 function Signup() {
+  
+  const {signup, error}= useAuth();
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("")
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSignup = async (event) => {
+    event.preventDefault();
+    try{
+      const data = { name, email, password };
+      const res = await signup(data)
+      console.log("res", res)
+      
+      if (res && res.message === "User successfully registered") {
+        navigate('/getalltasks');
+      }
+      setSubmitted(true);
+    } catch(error){
+      console.log("error", error)
+      
+    }
+  }
 
 
 return (
 <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
   <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
     <h1 className="font-bold text-center text-2xl mb-5"> Sign up </h1>  
-    <form>
+    <form onSubmit={handleSignup}>
     <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
       <div className="px-5 py-7">
+        
+        <label className="font-semibold text-sm text-gray-600 pb-1 block">Name</label>
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+
         <label className="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
-        <input type="username" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+        <input type="username" value={email} onChange={(e) => setEmail(e.target.value)}  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
 
         <label className="font-semibold text-sm text-gray-600 pb-1 block">Password</label>
-        <input type="password" autoComplete="current-password"className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password"className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
         
         <button type="submit" className="transition duration-200 bg-blue-400 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
             <span className="inline-block mr-2"> Register </span>
@@ -24,6 +53,11 @@ return (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
         </button>
+      
+        {submitted && error && (
+         <div className="text-red-500 font-semibold text-sm text-center mt-3">{error}</div>
+        )}
+
       </div>
       <div className="py-5">
         <div className="grid grid-cols-2 gap-1">
@@ -43,6 +77,7 @@ return (
         </div>
       </div>
     </div>
+
     <div className="py-5">
         <div className="grid grid-cols-2 gap-1">
           <div className="text-center sm:text-left whitespace-nowrap">
@@ -50,7 +85,7 @@ return (
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block align-text-top">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                <span className="inline-block ml-2">Back to Orbo.com</span>
+                <Link to="/"className="inline-block ml-1"> Back to Orbo.com </Link>
             </button>
           </div>
         </div>

@@ -23,7 +23,8 @@ export function AuthProvider({children}) {
         try {
             const res = await axios.post(`${baseURL}/login`, data);
             isUser(res.data);
-            console.log("res", res.data)
+            // console.log("res", res.data)
+            setError("");
             return res.data;
         } catch (error) {
             console.log("err", error.response.data.message)
@@ -31,9 +32,22 @@ export function AuthProvider({children}) {
 
         }
     }
+    const signup = async (data) => {
+        try{
+            const res = await axios.post(`${baseURL}/register`, data);
+            // console.log("res", res.data)
+            isUser(res.data)
+            setError("");
+            return res.data
+        }catch(error){
+            console.log("err", error.response.data.message)
+            setError(error.response.data.message)
+
+        }
+    }
     return(
         
-        <AuthContext.Provider value={{ login, user, error }}>
+        <AuthContext.Provider value={{ login, signup, user, error }}>
             {children}
         </AuthContext.Provider>
 
