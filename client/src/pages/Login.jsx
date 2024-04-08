@@ -1,15 +1,14 @@
-import React , {useState, useEffect} from "react";
+import React , {useState } from "react";
 import { useAuth } from "../../context/auth"
 import { useNavigate, Link } from "react-router-dom"
 
 
 function Login() {
-const { login, error } = useAuth();
+const { login, error , submitted} = useAuth();
 const navigate = useNavigate();
 
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("")
-const [submitted, setSubmitted] = useState(false);
 
 const handleLogin = async (event) => {
   event.preventDefault();
@@ -21,12 +20,12 @@ const handleLogin = async (event) => {
     if (res && res.token) {
       navigate('/getalltasks');
     }
-    setSubmitted(true);
+    // setSubmitted(true);
   } catch(error){
     console.log("error", error)
-e
   }
 }
+
 
 
 return (

@@ -3,7 +3,7 @@ import { useNavigate, Link} from "react-router-dom";
 import { useAuth } from "../../context/auth"
 
 function Signup() {
-  
+
   const {signup, error}= useAuth();
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ function Signup() {
     try{
       const data = { name, email, password };
       const res = await signup(data)
-      console.log("res", res)
+      // console.log("res", res)
       
       if (res && res.message === "User successfully registered") {
         navigate('/getalltasks');
@@ -25,11 +25,8 @@ function Signup() {
       setSubmitted(true);
     } catch(error){
       console.log("error", error)
-      
     }
-  }
-
-
+}
 return (
 <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
   <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">

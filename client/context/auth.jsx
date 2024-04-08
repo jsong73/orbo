@@ -15,21 +15,22 @@ export function AuthProvider({children}) {
     // const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, isUser]=useState(null)
     const [error, setError]= useState("")
-    
+    const [submitted, setSubmitted] = useState(false);
+
 
     const baseURL= "http://localhost:3001";
 
     const login = async (data) => {
         try {
             const res = await axios.post(`${baseURL}/login`, data);
-            isUser(res.data);
             // console.log("res", res.data)
-            setError("");
+            isUser(res.data);
+            setError("");  
             return res.data;
         } catch (error) {
             console.log("err", error.response.data.message)
             setError(error.response.data.message)
-
+            setSubmitted(true);
         }
     }
     const signup = async (data) => {
@@ -42,12 +43,14 @@ export function AuthProvider({children}) {
         }catch(error){
             console.log("err", error.response.data.message)
             setError(error.response.data.message)
-
+            setSubmitted(true);
         }
     }
+
+
     return(
         
-        <AuthContext.Provider value={{ login, signup, user, error }}>
+        <AuthContext.Provider value={{ login, signup, user, error , submitted}}>
             {children}
         </AuthContext.Provider>
 
