@@ -1,14 +1,15 @@
-import React , {useState } from "react";
+import React , {useState , useEffect} from "react";
 import { useAuth } from "../../context/auth"
 import { useNavigate, Link } from "react-router-dom"
 
 
 function Login() {
-const { login, error , submitted} = useAuth();
+const { login, error } = useAuth();
 const navigate = useNavigate();
 
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("")
+
 
 const handleLogin = async (event) => {
   event.preventDefault();
@@ -20,9 +21,9 @@ const handleLogin = async (event) => {
     if (res && res.token) {
       navigate('/getalltasks');
     }
-    // setSubmitted(true);
   } catch(error){
     console.log("error", error)
+ 
   }
 }
 
@@ -51,7 +52,7 @@ return (
             </svg>
         </button>
 
-        {submitted && error && (
+        { error && (
          <div className="text-red-500 font-semibold text-sm text-center mt-3">{error}</div>
         )}
 

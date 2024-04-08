@@ -15,8 +15,6 @@ export function AuthProvider({children}) {
     // const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, isUser]=useState(null)
     const [error, setError]= useState("")
-    const [submitted, setSubmitted] = useState(false);
-
 
     const baseURL= "http://localhost:3001";
 
@@ -25,12 +23,12 @@ export function AuthProvider({children}) {
             const res = await axios.post(`${baseURL}/login`, data);
             // console.log("res", res.data)
             isUser(res.data);
-            setError("");  
+            // setError("");  
             return res.data;
         } catch (error) {
             console.log("err", error.response.data.message)
             setError(error.response.data.message)
-            setSubmitted(true);
+
         }
     }
     const signup = async (data) => {
@@ -38,19 +36,26 @@ export function AuthProvider({children}) {
             const res = await axios.post(`${baseURL}/register`, data);
             // console.log("res", res.data)
             isUser(res.data)
-            setError("");
+            // setError("");
             return res.data
         }catch(error){
+
             console.log("err", error.response.data.message)
             setError(error.response.data.message)
-            setSubmitted(true);
         }
     }
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+        setError(null);
+    }, 4000);
+    
+    return () => clearTimeout(timeout);
+    }, [error]);
 
     return(
         
-        <AuthContext.Provider value={{ login, signup, user, error , submitted}}>
+        <AuthContext.Provider value={{ login, signup, user, error }}>
             {children}
         </AuthContext.Provider>
 
