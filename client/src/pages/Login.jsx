@@ -1,5 +1,5 @@
 import React , {useState} from "react";
-import {Link } from "react-router-dom"
+import { Form, Link } from "react-router-dom"
 import { login } from "../../utils/api";
 import Auth from "../../utils/auth";
 
@@ -45,7 +45,7 @@ return (
     <h1 className="font-bold text-center text-2xl mb-5"> Sign in</h1>  
 
 
-    <form onSubmit={handleLogin}>
+    <Form method="post" action="/login "onSubmit={handleLogin}>
     <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
       <div className="px-5 py-7">
 
@@ -97,7 +97,7 @@ return (
           </div>
         </div>
       </div>
-      </form>
+      </Form>
 
   </div>
 </div>

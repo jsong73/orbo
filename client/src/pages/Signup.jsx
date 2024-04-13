@@ -1,5 +1,5 @@
 import React , {useState} from "react";
-import {Link} from "react-router-dom";
+import { Form, Link} from "react-router-dom";
 import { signup } from "../../utils/api";
 import Auth from "../../utils/auth";
 
@@ -40,7 +40,7 @@ return (
 <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
   <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
     <h1 className="font-bold text-center text-2xl mb-5"> Sign up </h1>  
-    <form onSubmit={handleSignup}>
+    <Form method="post" action="/register" onSubmit={handleSignup}>
     <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
       <div className="px-5 py-7">
         
@@ -96,7 +96,7 @@ return (
           </div>
         </div>
       </div>
-      </form>
+      </Form>
   </div>
 </div>
   )
