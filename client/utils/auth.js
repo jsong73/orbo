@@ -1,6 +1,7 @@
 class AuthService {
     login(idToken){
         localStorage.setItem("id_token", idToken);
+        // console.log("id token:", idToken);
         window.location.assign("/tasks")
     }
     logout(){

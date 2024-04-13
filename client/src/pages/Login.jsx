@@ -28,10 +28,10 @@ const handleLogin = async (event) => {
           setError("Invalid credentials")
           break;
           default:
-            Auth.login(res.idToken);
+            Auth.login(res.token);
       }
     } else {
-      Auth.login(res.idToken);
+      Auth.login(res.token);
     }
   } catch(error){
     console.log("error", error)

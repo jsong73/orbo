@@ -5,8 +5,9 @@ import axios from "axios";
     export const login = async (data) => {
         try {
             const res = await axios.post(`${baseURL}/login`, data);
-            console.log("res", res)
+            console.log("res", res.data)
             return res.data;
+     
         } catch (error) {
             console.log("err", error)
         }
