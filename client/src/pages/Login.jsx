@@ -1,13 +1,13 @@
-import React , {useState , useEffect} from "react";
-import { useAuth } from "../../context/auth"
-import { useNavigate, Link } from "react-router-dom"
+import React , {useState} from "react";
+import {Link } from "react-router-dom"
+import { login } from "../../utils/api";
+import Auth from "../../utils/auth";
 
 function Login() {
-const { login, error } = useAuth();
-const navigate = useNavigate();
 
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("")
+const [error, setError] =useState("")
 
 const handleLogin = async (event) => {
   event.preventDefault();
@@ -16,15 +16,28 @@ const handleLogin = async (event) => {
     // console.log("data", data)
     const res = await login(data);
 
-    if (res && res.token) {
-      navigate('/getalltasks');
+    if(res && res.message) {
+      switch(res.message) {
+        case "Please fill out empty fields":
+          setError("Please fill out empty fields");
+          break;
+        case "No user exists":
+          setError("No user exists");
+          break;
+        case "Invalid credentials":
+          setError("Invalid credentials")
+          break;
+          default:
+            Auth.login(res.idToken);
+      }
+    } else {
+      Auth.login(res.idToken);
     }
   } catch(error){
     console.log("error", error)
- 
+
   }
 }
-
 
 return (
 <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">

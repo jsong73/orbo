@@ -10,7 +10,7 @@ router.post("/register", async (req, res) => {
         const {name, email, password} = req.body;
 
         if (!name || !email || !password) {
-            return res.status(400).json({ message: "Please fill out empty fields" });
+            return res.json({ message: "Please fill out empty fields" });
         }
 
         const user = await pool.query(
@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
     
 
         if(user.rows.length > 0 ) {
-            return res.status(400).json({message: "Email already in use"})
+            return res.json({message: "Email already in use"})
         }
 
         const hashPW = await bcrypt.hash(password, 10);
@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
         const { email, password }= req.body;
 
         if ( !email || !password) {
-            return res.status(400).json({ message: "Please fill out empty fields" });
+            return res.json({ message: "Please fill out empty fields" });
         }
 
         const user = await pool.query(
@@ -49,13 +49,13 @@ router.post("/login", async (req, res) => {
 
         //for select query use res.rows.length to check for empty query response
         if(user.rows.length === 0){
-            return res.status(401).json({ message: "No user exists"})
+            return res.json({ message: "No user exists"})
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.rows[0].hash_password);
 
         if(!isPasswordValid){
-            return res.status(401).json({ message: "Invalid credentials"});
+            return res.json({ message: "Invalid credentials"});
         }
 
         const token = jwt.sign({ userId: user.rows[0].id }, process.env.SECRET);

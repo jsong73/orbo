@@ -29,9 +29,13 @@ const router = createBrowserRouter([
         element: <Signup />
       },
       {
-        path: "/getalltasks",
+        path: "/tasks",
         element: <Tasks />
-      }
+      },
+      // {
+      //   path: "/tasks/:id",
+      //   element: <Task />
+      // }
     ]
   }
 ])

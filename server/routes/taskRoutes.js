@@ -3,16 +3,6 @@ const router = express.Router();
 const { pool } = require("../db/connection")
 const {verifyToken} = require("../utils/auth");
 
-router.get("/getalltasks", async (req, res) => {
-    try {
-        const tasks = await pool.query("SELECT * FROM tasks");
-        res.json(tasks.rows); 
-    } catch (error) {
-        console.error("Error fetching tasks:", error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
-
 //create task
 router.post("/", verifyToken, async (req, res) => {
     try{

@@ -1,30 +1,39 @@
 import React , {useState} from "react";
-import { useNavigate, Link} from "react-router-dom";
-import { useAuth } from "../../context/auth"
+import {Link} from "react-router-dom";
+import { signup } from "../../utils/api";
+import Auth from "../../utils/auth";
 
 function Signup() {
-
-  const {signup, error}= useAuth();
-  const navigate = useNavigate();
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
-  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] =useState("")
 
   const handleSignup = async (event) => {
     event.preventDefault();
     try{
       const data = { name, email, password };
       const res = await signup(data)
-      // console.log("res", res)
-      
-      if (res && res.message === "User successfully registered") {
-        navigate('/getalltasks');
+      console.log("res", res)
+  
+      if(res && res.message) {
+        switch(res.message) {
+          case "Please fill out empty fields":
+            setError("Please fill out empty fields");
+            break;
+          case "Email already in use":
+            setError("Email already in use");
+            break;
+            default:
+              Auth.login(res.idToken);
+        }
+      } else {
+        Auth.login(res.idToken);
       }
-      setSubmitted(true);
     } catch(error){
       console.log("error", error)
+
     }
 }
 return (
@@ -51,7 +60,7 @@ return (
             </svg>
         </button>
       
-        {submitted && error && (
+        { error && (
          <div className="text-red-500 font-semibold text-sm text-center mt-3">{error}</div>
         )}
 
