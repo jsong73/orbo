@@ -27,7 +27,10 @@ router.post("/register", async (req, res) => {
             "INSERT INTO users(name, email, hash_password) VALUES ($1, $2, $3) RETURNING id",
             [name, email, hashPW]
         );
-        res.json({ message: "User successfully registered", user: newUser.rows[0]})
+
+        const token = jwt.sign({ userId: newUser.rows[0].id }, process.env.SECRET);
+
+        res.json({ message: "User successfully registered", token })
 
     } catch(error) {
         console.log(error)
@@ -59,7 +62,7 @@ router.post("/login", async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user.rows[0].id }, process.env.SECRET);
-        console.log(token)
+        console.log("token:", token)
 
         res.status(200).json({ token })
 

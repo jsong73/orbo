@@ -15,7 +15,7 @@ function Signup() {
     try{
       const data = { name, email, password };
       const res = await signup(data)
-      console.log("res", res)
+      // console.log("res", res)
   
       if(res && res.message) {
         switch(res.message) {
@@ -26,10 +26,10 @@ function Signup() {
             setError("Email already in use");
             break;
             default:
-              Auth.login(res.idToken);
+              Auth.login(res.token);
         }
       } else {
-        Auth.login(res.idToken);
+        Auth.login(res.token);
       }
     } catch(error){
       console.log("error", error)
