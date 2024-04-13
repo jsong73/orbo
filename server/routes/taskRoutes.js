@@ -6,7 +6,7 @@ const {verifyToken} = require("../utils/auth");
 router.get("/getalltasks", async (req, res) => {
     try {
         const tasks = await pool.query("SELECT * FROM tasks");
-        res.json(tasks.rows); // Send the tasks as JSON response
+        res.json(tasks.rows); 
     } catch (error) {
         console.error("Error fetching tasks:", error);
         res.status(500).json({ message: "Internal server error" });

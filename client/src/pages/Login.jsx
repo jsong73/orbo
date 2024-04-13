@@ -2,14 +2,12 @@ import React , {useState , useEffect} from "react";
 import { useAuth } from "../../context/auth"
 import { useNavigate, Link } from "react-router-dom"
 
-
 function Login() {
 const { login, error } = useAuth();
 const navigate = useNavigate();
 
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("")
-
 
 const handleLogin = async (event) => {
   event.preventDefault();
@@ -26,7 +24,6 @@ const handleLogin = async (event) => {
  
   }
 }
-
 
 
 return (

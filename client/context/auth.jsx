@@ -46,7 +46,7 @@ export function AuthProvider({children}) {
     useEffect(() => {
         const timeout = setTimeout(() => {
         setError(null);
-    }, 4000);
+    }, 2000);
     
     return () => clearTimeout(timeout);
     }, [error]);
