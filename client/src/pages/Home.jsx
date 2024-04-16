@@ -6,7 +6,7 @@ function Home() {
   return (
     <div> 
         {/* Home */}
-        <Nav />
+
         <Hero />
 
     </div>

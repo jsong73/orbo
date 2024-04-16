@@ -1,7 +1,6 @@
 INSERT INTO categories (name) VALUES 
 ('Personal'),
 ('Work'),
-('Personal'),
 ('Study'),
 ('Home');
 
