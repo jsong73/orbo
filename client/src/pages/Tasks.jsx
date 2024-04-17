@@ -16,6 +16,9 @@ function Tasks() {
         console.log("response", response)
 
 
+        // if(response.completed)
+
+
         const filteredTasksByDate = response.slice().sort((a,b) =>{
           return new Date(b.created_at) - new Date(a.created_at);
         })
