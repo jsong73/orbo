@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Auth from "../../utils/auth"
 import { tasks } from "../../utils/api"
 import {icons} from "../../utils/icons"
+
 function Tasks() {
 
   const [taskData, setTaskData] = useState([])
@@ -14,12 +15,19 @@ function Tasks() {
         const response = await tasks(token)
         console.log("response", response)
 
+
+        const filteredTasksByDate = response.slice().sort((a,b) =>{
+          return new Date(b.created_at) - new Date(a.created_at);
+        })
+
+
         if (typeof response.message === "string") {
           setError(response.message);
           setTaskData([]); 
         } else {
-          setTaskData(response);
+          setTaskData(filteredTasksByDate);
           setError("");
+
         }
       }catch(error){
         console.log(error)
