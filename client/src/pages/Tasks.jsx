@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { Link } from "react-router-dom"
 import Auth from "../../utils/auth"
 import { tasks } from "../../utils/api"
 import { FiSmartphone } from "react-icons/fi";
@@ -18,7 +19,6 @@ function Tasks() {
         const response = await tasks(token)
         console.log("response", response)
 
-        console.log("icons", icons)
         console.log("taskData", taskData)
 
         if (typeof response.message === "string") {
@@ -29,7 +29,6 @@ function Tasks() {
         const filteredTasksByDate = response.slice().sort((a,b) =>{
           return new Date(b.created_at) - new Date(a.created_at);
         })
-
           setTaskData(filteredTasksByDate);
           setError("");
 
@@ -44,9 +43,11 @@ function Tasks() {
 
 return (
 <div className="flex items-center justify-center">
+
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
-        {taskData.map((task, index) => (
-            <div key={index} className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
+        {taskData.map((task, i) => (
+            <Link key={i} to={`/tasks/${task.id}`}>
+            <div  className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
 
                 <div className={`text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6 
                 ${task.category === "Personal" ? "bg-pink-500" : ""}
@@ -91,13 +92,15 @@ return (
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+            </Link>
         ))}
     </div>
     {error && <p>{error}</p>}
-</div>
 
+</div>
   )
 }
 
