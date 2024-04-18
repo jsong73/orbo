@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
 import Auth from "../../utils/auth"
 import { tasks } from "../../utils/api"
-import { icons } from "../../utils/icons"
+import { FiSmartphone } from "react-icons/fi";
+import { TbBook2 } from "react-icons/tb";
+import { GrHomeRounded } from "react-icons/gr";
+import { MdWorkOutline } from "react-icons/md";
 
 function Tasks() {
 
@@ -18,15 +21,15 @@ function Tasks() {
         console.log("icons", icons)
         console.log("taskData", taskData)
 
-        const filteredTasksByDate = response.slice().sort((a,b) =>{
-          return new Date(b.created_at) - new Date(a.created_at);
-        })
-
-
         if (typeof response.message === "string") {
           setError(response.message);
           setTaskData([]); 
         } else {
+          
+        const filteredTasksByDate = response.slice().sort((a,b) =>{
+          return new Date(b.created_at) - new Date(a.created_at);
+        })
+
           setTaskData(filteredTasksByDate);
           setError("");
 
@@ -44,9 +47,19 @@ return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
         {taskData.map((task, index) => (
             <div key={index} className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
-              <div className={`text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6 ${icons[task.category].color}`}>
 
-                  {icons[task.category].icon}
+                <div className={`text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6 
+                ${task.category === "Personal" ? "bg-pink-500" : ""}
+                ${task.category === "Study" ? "bg-green-500" : ""}
+                ${task.category === "Work" ? "bg-blue-500" : ""}
+                ${task.category === "Home" ? "bg-yellow-500" : ""}`}>
+
+
+                {task.category === "Personal" && <FiSmartphone className="h-8 w-8"/>}
+                {task.category === "Study" && <TbBook2 className="h-8 w-8"/> }
+                {task.category === "Work" && <MdWorkOutline className="h-8 w-8"/> }
+                {task.category === "Home" && <GrHomeRounded className="h-8 w-8"/> }
+   
                 </div>
                 <div className="mt-8">
                     <p className="text-xl font-semibold my-2">{task.title}</p>
