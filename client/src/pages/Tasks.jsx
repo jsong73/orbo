@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Auth from "../../utils/auth"
 import { tasks } from "../../utils/api"
-import {icons} from "../../utils/icons"
+import { icons } from "../../utils/icons"
 
 function Tasks() {
 
@@ -15,9 +15,8 @@ function Tasks() {
         const response = await tasks(token)
         console.log("response", response)
 
-
-        // if(response.completed)
-
+        console.log("icons", icons)
+        console.log("taskData", taskData)
 
         const filteredTasksByDate = response.slice().sort((a,b) =>{
           return new Date(b.created_at) - new Date(a.created_at);
@@ -45,7 +44,8 @@ return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
         {taskData.map((task, index) => (
             <div key={index} className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
-              <div className={`text-white flex items-center absolute rounded-full py-4 px-4         shadow-xl left-4 -top-6 ${icons[task.category].color}`}>
+              <div className={`text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6 ${icons[task.category].color}`}>
+
                   {icons[task.category].icon}
                 </div>
                 <div className="mt-8">
@@ -82,7 +82,6 @@ return (
             </div>
         ))}
     </div>
-
     {error && <p>{error}</p>}
 </div>
 
