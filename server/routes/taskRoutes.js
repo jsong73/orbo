@@ -45,6 +45,27 @@ router.get("/", verifyToken, async (req, res) => {
     }
 })
 
+router.get("/:id", verifyToken, async (req, res) => {
+    try{
+        const taskId = req.params.id;
+        const userId = req.user.userId;
+
+        const task = await pool.query(
+            "SELECT * FROM tasks WHERE id = $1 AND user_id = $2",
+            [taskId, userId]
+        );
+
+        if(task.rows.length === 0){
+            res.json({ message: "Task not found"})
+        }
+
+        res.json(task.rows[0])
+
+    } catch(error){
+        console.log(error)
+    }
+})
+
 router.put("/:id", verifyToken, async (req, res) => {
     try{
         const { title, description, completed, category, due_date, priority } = req.body;

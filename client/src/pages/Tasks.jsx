@@ -6,6 +6,7 @@ import { FiSmartphone } from "react-icons/fi";
 import { TbBook2 } from "react-icons/tb";
 import { GrHomeRounded } from "react-icons/gr";
 import { MdWorkOutline } from "react-icons/md";
+import TaskId from "../pages/TaskId"
 
 function Tasks() {
 
@@ -17,9 +18,8 @@ function Tasks() {
       try {
         const token = Auth.getToken();
         const response = await tasks(token)
-        console.log("response", response)
-
-        console.log("taskData", taskData)
+        // console.log("response", response)
+        // console.log("taskData", taskData)
 
         if (typeof response.message === "string") {
           setError(response.message);
@@ -47,7 +47,7 @@ return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
         {taskData.map((task, i) => (
             <Link key={i} to={`/tasks/${task.id}`}>
-            <div  className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
+                <div  className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
 
                 <div className={`text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6 
                 ${task.category === "Personal" ? "bg-pink-500" : ""}

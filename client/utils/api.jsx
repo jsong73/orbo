@@ -37,3 +37,17 @@ import axios from "axios";
     }
 
     
+    export const task = async(id, token) => {
+        try {
+            const res = await axios.get(`${baseURL}/tasks/${id}`,{
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            })
+            console.log("res", res.data)
+            return res.data;
+        } catch (error){
+            console.log(error)
+        }
+    }
+    
