@@ -10,10 +10,8 @@ function TaskModal({showModal, setModal}) {
         console.log("setModal?", setModal)
     }
 
-    const today = new Date();
-    const fixedDate = today.toGMTString().split(' ').slice(0, 4);
-    // console.log("fixed",fixedDate)
-
+    const today = new Date().toLocaleDateString();
+    
 
     const addTask = async (taskData) => {
         try{
@@ -53,7 +51,20 @@ function TaskModal({showModal, setModal}) {
                     <div className="mt-2 px-4 flex items-center ">
                         <FaRegClock className="mr-2 ml-3 text-gray-400" /> 
                         <p className="text-gray-400">Date Created</p>
-                        <span className="ml-32">{fixedDate}</span>
+                        <span className="ml-28">{today}</span>
+                    </div>
+
+                    
+                    <div className="mt-2 px-4 flex items-center">
+                    <FaRegClock className="mr-2 ml-3 text-gray-400" /> 
+                    <p className="text-gray-400 mr-36">Status</p>
+                    <select 
+                        className="ml-4 border border-gray-300 rounded-md p-1 focus:outline-none">
+
+                        <option value="To Do">To Do</option>
+                         <option value="Doing">Doing</option>
+                        <option value="Done">Done</option>
+                    </select>
                     </div>
 
 
@@ -63,13 +74,7 @@ function TaskModal({showModal, setModal}) {
               
         
                   </div>
-                  <div className="mt-6 px-4">
-                    <button className="flex justify-center items-center bg-black text-white rounded-md text-sm p-2 gap-1">
-                      <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M3 7C3 6.44772 3.44772 6 4 6H20C20.5523 6 21 6.44772 21 7C21 7.55228 20.5523 8 20 8H4C3.44772 8 3 7.55228 3 7ZM6 12C6 11.4477 6.44772 11 7 11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H7C6.44772 13 6 12.5523 6 12ZM9 17C9 16.4477 9.44772 16 10 16H14C14.5523 16 15 16.4477 15 17C15 17.5523 14.5523 18 14 18H10C9.44772 18 9 17.5523 9 17Z" fill="currentColor"></path>
-                      </svg> Filters
-                    </button>
-                  </div>
+   
                 </div>
               </div>
             </section>
