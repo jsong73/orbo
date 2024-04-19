@@ -5,7 +5,7 @@ import axios from "axios";
     export const login = async (data) => {
         try {
             const res = await axios.post(`${baseURL}/login`, data);
-            console.log("res", res.data)
+            // console.log("res", res.data)
             return res.data;
      
         } catch (error) {
@@ -15,7 +15,7 @@ import axios from "axios";
     export const signup = async (data) => {
         try{
             const res = await axios.post(`${baseURL}/register`, data);
-            console.log("res", res.data)
+            // console.log("res", res.data)
             return res.data
         }catch(error){
             console.log("err", error)
@@ -29,7 +29,7 @@ import axios from "axios";
                     Authorization: `Bearer ${token}` 
                 }
             })
-            console.log("res", res.data)
+            // console.log("res", res.data)
             return res.data;
         } catch (error){
             console.log(error)
@@ -44,7 +44,7 @@ import axios from "axios";
                     Authorization: `Bearer ${token}` 
                 }
             })
-            console.log("res", res.data)
+            // console.log("res", res.data)
             return res.data;
         } catch (error){
             console.log(error)
