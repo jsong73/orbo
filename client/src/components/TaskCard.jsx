@@ -11,30 +11,34 @@ return (
 
         <div>
           <h1 className="font-semibold text-xl mb-4">{todo}</h1>
-          <div className="relative flex flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl">
+          <div className="relative rounded-md flex flex-col bg-clip-border bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden">
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="p-6 relative flex flex-col justify-end"></div>
-            <NewBtn />
+          
           </div>
+          <NewBtn />
         </div>
 
    
         <div>
           <h1 className="font-semibold text-xl mb-4">{doing}</h1>
-          <div className="relative flex flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl">
+          <div className="relative rounded-md flex flex-col bg-clip-border bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden ">
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="p-6 relative flex flex-col justify-end"></div>
-            <NewBtn />
+     
           </div>
+          <NewBtn />
         </div>
+ 
 
         <div>
-          <h1 className="font-semibold text-xl mb-4">{done}</h1>
-          <div className="relative flex flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl">
-            <div className="absolute inset-0 bg-black/10"></div>
+          <h1 className="font-semibold text-xl mb-4 ">{done}</h1>
+          <div className="relative rounded-md flex flex-col bg-clip-borderbg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden">
+            <div className="absolute inset-0 bg-black/10 "></div>
             <div className="p-6 relative flex flex-col justify-end"></div>
-            <NewBtn/>
+
           </div>
+          <NewBtn />
         </div>
 
 
