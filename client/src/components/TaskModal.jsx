@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { addTask } from "../../utils/api";
 import Auth from "../../utils/auth"
 import { FaRegClock } from "react-icons/fa6";
+import { TbStatusChange } from "react-icons/tb";
 
 function TaskModal({showModal, setModal}) {
 
@@ -10,8 +11,8 @@ function TaskModal({showModal, setModal}) {
         console.log("setModal?", setModal)
     }
 
-    const today = new Date().toLocaleDateString();
-    
+    const today =  new Date().toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' });
+    // console.log(today)
 
     const addTask = async (taskData) => {
         try{
@@ -48,18 +49,18 @@ function TaskModal({showModal, setModal}) {
                     </button>
                   </div>
 
-                    <div className="mt-2 px-4 flex items-center ">
+                    <div className="mt-4 px-4 flex items-center ">
                         <FaRegClock className="mr-2 ml-3 text-gray-400" /> 
                         <p className="text-gray-400">Date Created</p>
-                        <span className="ml-28">{today}</span>
+                        <span className=" ml-28">{today}</span>
                     </div>
 
                     
-                    <div className="mt-2 px-4 flex items-center">
-                    <FaRegClock className="mr-2 ml-3 text-gray-400" /> 
+                    <div className="mt-4 px-4 flex items-center">
+                    <TbStatusChange  className="mr-2 ml-3 text-gray-400" /> 
                     <p className="text-gray-400 mr-36">Status</p>
                     <select 
-                        className="ml-4 border border-gray-300 rounded-md p-1 focus:outline-none">
+                        className=" ml-4 border border-gray-300 rounded-md p-1 focus:outline-none">
 
                         <option value="To Do">To Do</option>
                          <option value="Doing">Doing</option>
@@ -68,10 +69,10 @@ function TaskModal({showModal, setModal}) {
                     </div>
 
 
-
-
-                  <div className="mt-4 px-4 h-full overflow-auto">
-              
+                  <div className="ml-2 mt-4 px-4 h-full">
+                  <h2 className="mt-8 font-semibold text-xl !text-gray-500">Description</h2>
+                  <textarea  className="mt-8 w-full h-5/6 whitespace-normal focus:outline-none" placeholder="Write something here ☺" type="text"> 
+                  </textarea >
         
                   </div>
    

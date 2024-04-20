@@ -2,12 +2,10 @@ import React , {useState}from "react";
 import TaskModal from "./TaskModal";
 
 function NewBtn() {
-    console.log("working")
+
   const [ showModal, setModal ] = useState(false)
-  console.log("working1")
 
   const handleClick = () => {
-    console.log("working2")
     setModal(true)
 
   }
