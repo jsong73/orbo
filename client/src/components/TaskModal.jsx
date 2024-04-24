@@ -14,13 +14,10 @@ function TaskModal({showModal, setModal}) {
     const handleClick = async () => {
         setModal(false)
         // console.log("setModal?", setModal)
+        
         try{
             const token = Auth.getToken();
 
-            await addTask({ title: title, description: description, status: status }, token); 
-            console.log("title", title)
-            console.log("description", description)
-            console.log("status", status)
 
         } catch(error) {
             console.log(error)

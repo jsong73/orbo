@@ -25,7 +25,7 @@ function BoardModal({ showModal, setModal }) {
             console.log("new task", newTask)
     
           window.location.reload();
-          
+
         } catch(error) {
             console.log(error)
         }
@@ -120,6 +120,8 @@ function BoardModal({ showModal, setModal }) {
                             onChange={(e) => setDescription(e.target.value)}
                         ></textarea>
                     </div>
+
+                    
 
                 {title && (
                     <div className="mt-4 flex justify-end text-blue-500">

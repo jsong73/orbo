@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import BoardModal from "./BoardModal";
 
-function CreateBoardBtn({updateTask}) {
+function CreateBoardBtn() {
   
   const [ showModal, setModal ] = useState(false)
 

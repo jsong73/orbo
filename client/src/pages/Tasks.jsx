@@ -12,9 +12,8 @@ import { BiCustomize } from "react-icons/bi";
 function Tasks() {
 
   const [taskData, setTaskData] = useState([])
-  const [error, setError] = useState("")
+  // const [error, setError] = useState("")
 
-  
 
   useEffect(() => {
     const getAllTasks = async () => {
@@ -25,7 +24,7 @@ function Tasks() {
         // console.log("taskData", taskData)
 
         if (typeof response.message === "string") {
-          setError(response.message);
+          // setError(response.message);
           setTaskData([]); 
         } else {
           
@@ -33,7 +32,7 @@ function Tasks() {
           return new Date(b.created_at) - new Date(a.created_at);
         })
           setTaskData(filteredTasksByDate);
-          setError("");
+          // setError("");
 
         }
       }catch(error){
@@ -46,6 +45,14 @@ function Tasks() {
 
 
 return (
+
+<section className="container mx-auto px-8 py-8 lg:py-10">
+   <h2 className="font-sans text-4xl font-semibold text-blue-gray-900 lg:!text-4xl" >Boards</h2>
+
+   <p className="text-sm mt-3">Click <b>+ Create new board</b> to create a new workflow.</p>
+    <p className="text-sm mb-10 ">Click an existing board to start creating tasks.</p>
+
+
 <div className="flex items-center justify-center">
 
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
@@ -67,6 +74,7 @@ return (
                 {task.category === "Home" && <GrHomeRounded className="h-8 w-8"/> }
                 {task.category === "Other" && <BiCustomize className="h-8 w-8"/> }
                 </div>
+
 
                 <div className="mt-8">
                     <p className="text-xl font-semibold my-2">{task.title}</p>
@@ -98,21 +106,22 @@ return (
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-            
             </Link>
+
+
+            
             
         ))}
-        <div className="relative h-65 bg-white py-6 px-6 rounded-3xl w-80 flex items-center justify-center my-4 shadow-xl hover:bg-blue-100 transition duration-300 ">
+        <div className="relative h-64 bg-white py-6 px-6 rounded-3xl w-80 flex items-center       justify-center my-4 shadow-xl hover:bg-blue-100 transition duration-300 ">
           <CreateBoardBtn  />
         </div>
-    </div>
     
-    {error && <p>{error}</p>}
-
+    
+    </div>
 </div>
+</section>
   )
 }
 

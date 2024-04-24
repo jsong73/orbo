@@ -40,7 +40,9 @@ return (
 <div>
 
 
-<section className="container mx-auto px-8 py-8 lg:py-20">
+<section className="container mx-auto px-8 py-8 lg:py-10">
+
+    
    <h2 className="font-sans text-4xl font-semibold text-blue-gray-900 lg:!text-4xl">{taskIdData.title}</h2>
     <p className="font-sans text-xl  leading-relaxed text-inherit mt-2 w-full font-normal !text-gray-500 lg:w-5/12">{taskIdData.description}</p>
 
