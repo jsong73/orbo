@@ -96,10 +96,15 @@ return (
 
                 </div>
             </div>
+            
             </Link>
+            
         ))}
-        <CreateBoardBtn />
+        <div className="relative bg-white py-6 px-6 rounded-3xl w-80 flex items-center justify-center my-4 shadow-xl hover:bg-blue-100 transition duration-300">
+          <CreateBoardBtn />
+        </div>
     </div>
+    
     {error && <p>{error}</p>}
 
 </div>

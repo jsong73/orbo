@@ -1,14 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import BoardModal from "./BoardModal";
 
 function CreateBoardBtn() {
   
+  const [ showModal, setModal ] = useState(false)
 
+  const handleClick = () => {
+    setModal(true)
+    console.log("opened?", showModal)
+
+  }
   return (
-    <button className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl flex items-center justify-center  hover:bg-blue-100 transition duration-300">
-        <AiOutlinePlus className="mr-2" /> 
+    <div>
+      <button
+        onClick={handleClick}
+        className="flex items-center justify-center"
+      >
+        <AiOutlinePlus className="mr-2" />
         <span className="font-semibold ">Create new board</span>
-    </button>
+      </button>
+     <BoardModal showModal={showModal} setModal={setModal} />
+    </div>
   )
 }
 
