@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Modal from 'react-modal';
 import { FaRegClock } from "react-icons/fa6";
-import { TbStatusChange } from "react-icons/tb";
-import { GrUploadOption } from "react-icons/gr";
+import Select from 'react-select';
 import { MdOutlinePriorityHigh } from "react-icons/md";
+import { GrUploadOption } from "react-icons/gr";
+import { addTask } from "../../utils/api";
+import Auth from "../../utils/auth"
 
 function BoardModal({ showModal, setModal }) {
 
@@ -12,10 +13,23 @@ function BoardModal({ showModal, setModal }) {
     const [ category, setCategory ] = useState("")
     const [ priority, setPriority ] = useState("")
 
-    const handleClick = () => {
+
+    const handleClick = async () => {
         setModal(false)
-        console.log("closed?", showModal)
-    }
+        console.log("open?", setModal)
+        try{
+            const token = Auth.getToken();
+
+            const newTask = await addTask({ title: title, description: description, category: category, priority: priority }, token); 
+
+            console.log("new task", newTask)
+    
+          window.location.reload();
+          
+        } catch(error) {
+            console.log(error)
+        }
+      }
 
     const today =  new Date().toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' });
 
@@ -60,16 +74,20 @@ function BoardModal({ showModal, setModal }) {
                             </svg>
                             <p className="text-gray-400 ml-2">Category</p>
                         </div>
-                        <select
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
-                            className="ml-12 border border-gray-300 rounded-md p-1 focus:outline-none"
-                        >
-                            <option value="Personal">Personal</option>
-                            <option value="Home">Home</option>
-                            <option value="Study">Study</option>
-                            <option value="Work">Work</option>
-                        </select>
+                        <Select
+                            placeholder="Select"
+                            value={{ value: category, label: category }}
+                            onChange={(option) => setCategory(option.value)}
+                            options={[
+                                    { value: 'Personal', label: 'Personal' },
+                                    { value: 'Home', label: 'Home' },
+                                    { value: 'Study', label: 'Study' },
+                                    { value: 'Work', label: 'Work' },
+                                    { value: 'Other', label: 'Other' }
+                                    ]}
+                            className="ml-12 w-1/4"
+                    
+                    />
                     </div>
 
 
@@ -78,15 +96,17 @@ function BoardModal({ showModal, setModal }) {
                             <MdOutlinePriorityHigh  className="mr-2 text-gray-400" />
                             <p className="text-gray-400">Priority</p>
                         </div>
-                        <select
-                            value={priority}
-                            onChange={(e) => setPriority(e.target.value)}
-                            className="ml-16 border border-gray-300 rounded-md p-1 focus:outline-none"
-                        >
-                            <option value="Personal">1</option>
-                            <option value="Home">2</option>
-                            <option value="Study">3</option>
-                        </select>
+                    <Select
+                        placeholder="Select"
+                        value={{ value: priority, label: priority }}
+                        onChange={(option) => setPriority(option.value)}
+                        options={[
+                        { value: '1', label: '1'},
+                        { value: '2', label: '2'},
+                        { value: '3', label: '3'}
+                        ]}
+                        className="ml-16 w-1/4"
+                    />
                     </div>
 
 
@@ -100,10 +120,14 @@ function BoardModal({ showModal, setModal }) {
                             onChange={(e) => setDescription(e.target.value)}
                         ></textarea>
                     </div>
-                    <div className="mt-4 flex justify-end">
-                        <button className="text-gray-500 hover:text-gray-700" onClick={handleClick}>Cancel</button>
-                        <button className="bg-blue-500 text-white ml-2 px-4 py-2 rounded-md">Create</button>
+
+                {title && (
+                    <div className="mt-4 flex justify-end text-blue-500">
+                        <button onClick={handleClick} className="text-2xl">
+                        <GrUploadOption />
+                        </button>
                     </div>
+                    )}
                 </div>
             </div>
         </div>

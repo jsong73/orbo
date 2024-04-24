@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import BoardModal from "./BoardModal";
 
-function CreateBoardBtn() {
+function CreateBoardBtn({updateTask}) {
   
   const [ showModal, setModal ] = useState(false)
 
@@ -11,6 +11,7 @@ function CreateBoardBtn() {
     console.log("opened?", showModal)
 
   }
+  
   return (
     <div>
       <button

@@ -7,12 +7,14 @@ import { TbBook2 } from "react-icons/tb";
 import { GrHomeRounded } from "react-icons/gr";
 import { MdWorkOutline } from "react-icons/md";
 import CreateBoardBtn from "../components/CreateBoardBtn";
-
+import { BiCustomize } from "react-icons/bi";
 
 function Tasks() {
 
   const [taskData, setTaskData] = useState([])
   const [error, setError] = useState("")
+
+  
 
   useEffect(() => {
     const getAllTasks = async () => {
@@ -42,6 +44,7 @@ function Tasks() {
     getAllTasks()
   }, [])
 
+
 return (
 <div className="flex items-center justify-center">
 
@@ -54,6 +57,7 @@ return (
                 ${task.category === "Personal" ? "bg-pink-500" : ""}
                 ${task.category === "Study" ? "bg-green-500" : ""}
                 ${task.category === "Work" ? "bg-blue-500" : ""}
+                ${task.category === "Other" ? "bg-purple-500" : ""}
                 ${task.category === "Home" ? "bg-yellow-500" : ""}`}>
 
 
@@ -61,8 +65,9 @@ return (
                 {task.category === "Study" && <TbBook2 className="h-8 w-8"/> }
                 {task.category === "Work" && <MdWorkOutline className="h-8 w-8"/> }
                 {task.category === "Home" && <GrHomeRounded className="h-8 w-8"/> }
-   
+                {task.category === "Other" && <BiCustomize className="h-8 w-8"/> }
                 </div>
+
                 <div className="mt-8">
                     <p className="text-xl font-semibold my-2">{task.title}</p>
                     <div className="flex space-x-2 text-gray-400 text-sm">
@@ -83,7 +88,7 @@ return (
                         <div className="my-2">
                             <p className="font-semibold text-base mb-2">Created on</p>
                             <div className="flex space-x-2">
-                            {task.created_at.substring(0, 10)} 
+                            {task.created_at?.substring(0, 10)} 
                             </div>
                         </div>
                         <div className="my-2">
@@ -100,8 +105,8 @@ return (
             </Link>
             
         ))}
-        <div className="relative bg-white py-6 px-6 rounded-3xl w-80 flex items-center justify-center my-4 shadow-xl hover:bg-blue-100 transition duration-300">
-          <CreateBoardBtn />
+        <div className="relative h-65 bg-white py-6 px-6 rounded-3xl w-80 flex items-center justify-center my-4 shadow-xl hover:bg-blue-100 transition duration-300 ">
+          <CreateBoardBtn  />
         </div>
     </div>
     
