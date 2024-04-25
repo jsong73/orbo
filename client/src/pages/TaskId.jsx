@@ -2,7 +2,7 @@ import React , {useEffect, useState}from "react";
 import { task } from "../../utils/api"
 import Auth from "../../utils/auth"
 import { useParams } from "react-router-dom"
-import TaskCard from "../components/TaskCard"
+import SubtaskCard from "../components/SubtaskCard"
 
 function TaskId() {
 
@@ -60,9 +60,9 @@ return (
     <p className="text-sm">Click an existing task to add additional context or subtasks.</p>
 
     
-    <TaskCard todo="To Do"
-              doing="Doing"
-              done="Done"  
+    <SubtaskCard todo="To Do"
+                doing="Doing"
+                done="Done"  
     />
 
 

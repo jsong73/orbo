@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import BoardModal from "./BoardModal";
+import TaskModal from "./TaskModal";
 
 function CreateBoardBtn() {
   
@@ -21,7 +21,7 @@ function CreateBoardBtn() {
         <AiOutlinePlus className="mr-2" />
         <span className="font-semibold ">Create new board</span>
       </button>
-     <BoardModal showModal={showModal} setModal={setModal} />
+     <TaskModal showModal={showModal} setModal={setModal} />
     </div>
   )
 }

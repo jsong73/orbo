@@ -1,5 +1,5 @@
 import React from "react";
-import NewBtn from "../components/NewBtn"
+import CreateSubtaskBtn from "./CreateSubtaskBtn"
 
 function TaskCard({ todo, doing, done }) {
 
@@ -16,7 +16,7 @@ return (
             <div className="p-6 relative flex flex-col justify-end"></div>
           
           </div>
-          <NewBtn />
+          <CreateSubtaskBtn />
         </div>
 
    
@@ -27,7 +27,7 @@ return (
             <div className="p-6 relative flex flex-col justify-end"></div>
      
           </div>
-          <NewBtn />
+          <CreateSubtaskBtn />
         </div>
  
 
@@ -38,7 +38,7 @@ return (
             <div className="p-6 relative flex flex-col justify-end"></div>
 
           </div>
-          <NewBtn />
+          <CreateSubtaskBtn />
         </div>
 
 

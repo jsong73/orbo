@@ -1,5 +1,5 @@
 import React , {useState}from "react";
-import TaskModal from "./TaskModal";
+import SubtaskModal from "./SubtaskModal";
 
 function NewBtn() {
 
@@ -23,7 +23,7 @@ function NewBtn() {
         <span className="ml-1 font-bold">New</span>
       </button>
 
-      <TaskModal showModal={showModal} setModal={setModal} />
+      <SubtaskModal showModal={showModal} setModal={setModal} />
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { FiSmartphone } from "react-icons/fi";
 import { TbBook2 } from "react-icons/tb";
 import { GrHomeRounded } from "react-icons/gr";
 import { MdWorkOutline } from "react-icons/md";
-import CreateBoardBtn from "../components/CreateBoardBtn";
+import CreateTaskBtn from "../components/CreateTaskBtn";
 import { BiCustomize } from "react-icons/bi";
 
 function Tasks() {
@@ -115,7 +115,7 @@ return (
             
         ))}
         <div className="relative h-64 bg-white py-6 px-6 rounded-3xl w-80 flex items-center       justify-center my-4 shadow-xl hover:bg-blue-100 transition duration-300 ">
-          <CreateBoardBtn  />
+          <CreateTaskBtn  />
         </div>
     
     
