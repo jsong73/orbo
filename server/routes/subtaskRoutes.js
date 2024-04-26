@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { pool } = require("../db/connection");
 
-router.get("/:id/subtasks", async (req, res) => {
+router.get("/:id/subtasks", verifyToken, async (req, res) => {
     try{
         const taskId = req.params.id;
 
@@ -22,7 +22,7 @@ router.get("/:id/subtasks", async (req, res) => {
     }
 })
 
-router.post("/:id/subtasks", async (req, res) => {
+router.post("/:id/subtasks", verifyToken, async (req, res) => {
     try{
         const { title, description, completed } = req.body;
 
@@ -42,7 +42,7 @@ router.post("/:id/subtasks", async (req, res) => {
     }
 })
 
-router.put("/:id/subtasks/:subtaskId", async (req, res) => {
+router.put("/:id/subtasks/:subtaskId", verifyToken, async (req, res) => {
     try{
         const { title, description, completed } = req.body;
 
@@ -65,7 +65,7 @@ router.put("/:id/subtasks/:subtaskId", async (req, res) => {
     }
 })
 
-router.delete("/:id/subtasks/:subtaskId", async (req, res) => {
+router.delete("/:id/subtasks/:subtaskId", verifyToken, async (req, res) => {
     try{
         const taskId = req.params.id;
         const subtaskId = req.params.subtaskId;

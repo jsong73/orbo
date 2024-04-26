@@ -3,20 +3,24 @@ import Auth from "../../utils/auth"
 import { FaRegClock } from "react-icons/fa6";
 import { TbStatusChange } from "react-icons/tb";
 import { GrUploadOption } from "react-icons/gr";
+import { addSubtask } from "../../utils/api"; 
+import { IoPersonCircle } from "react-icons/io5";
 
-function TaskModal({showModal, setModal}) {
+
+function SubtaskModal({showModal, setModal}) {
 
     const [ title, setTitle ] = useState("")
     const [ description, setDescription] = useState("")
-    const [ status, setStatus ] = useState("")
 
     const handleClick = async () => {
         setModal(false)
         // console.log("setModal?", setModal)
-
         try{
             const token = Auth.getToken();
 
+            const newSubtask = await addSubtask({ title: title, description: description}, token)
+
+            console.log("new subtask", newSubtask)
 
         } catch(error) {
             console.log(error)
@@ -25,6 +29,8 @@ function TaskModal({showModal, setModal}) {
     
 
     const today =  new Date().toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' });
+    const username =  Auth.getProfile()
+    console.log("username", username)
     // console.log(today)
 
 
@@ -66,16 +72,9 @@ function TaskModal({showModal, setModal}) {
 
                     
                 <div className="mt-4 px-4 flex items-center">
-                    <TbStatusChange  className="mr-2 ml-3 text-gray-400" /> 
-                    <p className="text-gray-400 mr-36">Status</p>
-                        <select 
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
-                        className=" ml-4 border border-gray-300 rounded-md p-1 focus:outline-none">
-                        <option value="To Do">To do</option>
-                        <option value="Doing">Doing</option>
-                        <option value="Done">Done</option>
-                    </select>
+                    <IoPersonCircle  className="mr-2 ml-3 text-gray-400 text-xl" /> 
+                    <p className="text-gray-400 mr-36">Author</p>
+
                 </div>
         
 
@@ -92,11 +91,13 @@ function TaskModal({showModal, setModal}) {
 
 
 
-                {/* upload button */}
-                <button onClick={handleClick} className="text-2xl">
-                <GrUploadOption />
-                </button>
-        
+                {title && (
+                    <div className="mt-4 flex justify-end text-blue-500">
+                        <button onClick={handleClick} className="text-2xl">
+                        <GrUploadOption />
+                        </button>
+                    </div>
+                    )}
 
                   </div>
                 </div>
@@ -109,4 +110,4 @@ function TaskModal({showModal, setModal}) {
 );
 }
 
-export default TaskModal;
+export default SubtaskModal;

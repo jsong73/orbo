@@ -65,3 +65,31 @@ import axios from "axios";
         }
     }
     
+
+    export const subtasks = async(id, token) => {
+        try {
+            const res = await axios.get(`${baseURL}/tasks/${id}/subtasks`,{
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            })
+            console.log("res", res.data)
+            return res.data;
+        } catch (error){
+            console.log(error)
+        }
+    }
+
+    export const addSubtask = async(id, token) => {
+        try {
+            const res = await axios.post(`${baseURL}/tasks/${id}/subtasks`,{
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            })
+            console.log("res", res.data)
+            return res.data;
+        } catch (error){
+            console.log(error)
+        }
+    }

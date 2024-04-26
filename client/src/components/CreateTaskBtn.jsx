@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import TaskModal from "./TaskModal";
 
-function CreateBoardBtn() {
+function CreateTaskBtn() {
   
   const [ showModal, setModal ] = useState(false)
 
@@ -26,4 +26,4 @@ function CreateBoardBtn() {
   )
 }
 
-export default CreateBoardBtn;
+export default CreateTaskBtn;

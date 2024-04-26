@@ -1,7 +1,7 @@
 import React , {useState}from "react";
 import SubtaskModal from "./SubtaskModal";
 
-function NewBtn() {
+function CreateSubtaskBtn() {
 
   const [ showModal, setModal ] = useState(false)
 
@@ -28,4 +28,4 @@ function NewBtn() {
   )
 }
 
-export default NewBtn;
+export default CreateSubtaskBtn;

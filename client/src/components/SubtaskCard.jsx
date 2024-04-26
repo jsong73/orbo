@@ -1,7 +1,7 @@
 import React from "react";
 import CreateSubtaskBtn from "./CreateSubtaskBtn"
 
-function TaskCard({ todo, doing, done }) {
+function SubtaskCard({ todo, doing, done }) {
 
 // console.log("props", todo, doing, done)
 
@@ -47,4 +47,4 @@ return (
   );
 }
 
-export default TaskCard;
+export default SubtaskCard;

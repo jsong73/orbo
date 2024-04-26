@@ -6,7 +6,7 @@ import { GrUploadOption } from "react-icons/gr";
 import { addTask } from "../../utils/api";
 import Auth from "../../utils/auth"
 
-function BoardModal({ showModal, setModal }) {
+function TaskModal({ showModal, setModal }) {
 
     const [ title, setTitle ] = useState("")
     const [ description, setDescription] = useState("")
@@ -16,7 +16,7 @@ function BoardModal({ showModal, setModal }) {
 
     const handleClick = async () => {
         setModal(false)
-        console.log("open?", setModal)
+        // console.log("open?", setModal)
         try{
             const token = Auth.getToken();
 
@@ -138,4 +138,4 @@ function BoardModal({ showModal, setModal }) {
   )
 }
 
-export default BoardModal;
+export default TaskModal;
