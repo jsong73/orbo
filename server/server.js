@@ -10,12 +10,14 @@ app.use(cors())
 
 const userRoutes = require("./routes/userRoutes")
 const taskRoutes = require("./routes/taskRoutes")
+const subtaskRoutes = require("./routes/subtaskRoutes")
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/", userRoutes)
 app.use("/tasks", taskRoutes)
+app.use("/tasks", subtaskRoutes)
 
 app.listen(PORT, () => {
     console.log(`running on port ${PORT}`)
