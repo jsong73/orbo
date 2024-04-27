@@ -33,7 +33,7 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
             
             setTitle("");
             setDescription("");
-
+            window.location.reload();
         } catch(error) {
             console.log(error)
         }
