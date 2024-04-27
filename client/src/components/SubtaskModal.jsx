@@ -4,13 +4,21 @@ import { FaRegClock } from "react-icons/fa6";
 import { GrUploadOption } from "react-icons/gr";
 import { addSubtask } from "../../utils/api"; 
 import { IoPersonCircle } from "react-icons/io5";
+import { TbStatusChange } from "react-icons/tb";
 
-function SubtaskModal({showModal, setModal, taskId}) {
 
-  console.log("did taskId make it here?", taskId)
+import Select from 'react-select';
+
+function SubtaskModal({showModal, setModal, taskId, status }) {
+  console.log("this is status", status)
+  // console.log("did taskId make it here?", taskId)
     const [ title, setTitle ] = useState("")
     const [ description, setDescription] = useState("")
+    const [ subtaskStatus, setSubtaskStatus] = useState("To Do")
 
+    const handleClose = () => {
+      setModal(false)
+    }
 
     const handleClick = async () => {
         setModal(false)
@@ -18,9 +26,13 @@ function SubtaskModal({showModal, setModal, taskId}) {
         try{
             const token = Auth.getToken();
 
-            const newSubtask = await addSubtask(taskId, { title: title, description: description }, token);
+            const newSubtask = await addSubtask(taskId, { title: title, description: description, status: status }, token);
 
             console.log("new subtask", newSubtask)
+    
+            
+            setTitle("");
+            setDescription("");
 
         } catch(error) {
             console.log(error)
@@ -54,7 +66,7 @@ function SubtaskModal({showModal, setModal, taskId}) {
                 
 
                 {/* close button */}
-                <button onClick={handleClick} className="text-gray-500 hover:text-gray-700">
+                <button onClick={handleClose} className="text-gray-500 hover:text-gray-700">
                     <span className="sr-only">Close</span>
                       <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12">
@@ -63,18 +75,41 @@ function SubtaskModal({showModal, setModal, taskId}) {
                 </button>
                 </div>
 
-                <div className="mt-4 px-4 flex items-center ">
-                    <FaRegClock className="mr-2 ml-3 text-gray-400" /> 
-                    <p className="text-gray-400">Date Created</p>
-                    <span className=" ml-28">{today}</span>
+
+                <div className="mt-4 flex flex-col-2 ml-8">
+                        <div className="flex items-center">
+                            <FaRegClock className="mr-2 text-gray-400" />
+                            <p className="text-gray-400">Date Created</p>
+                        </div>
+                        <div className="ml-7">{today}</div>
                 </div>
 
+
+
+                <div className="mt-4 flex flex-col-2 ml-8">
+                        <div className="flex items-center">
+                            <TbStatusChange  className="mr-2 text-gray-400" />
+                            <p className="text-gray-400">Status</p>
+                        </div>
+                    <Select
+                        placeholder="Select"
+                        value={{ value: subtaskStatus, label: subtaskStatus }}
+                        onChange={(option) => setSubtaskStatus(option.value)}
+                        options={[
+                        { value: 'To Do', label: 'To Do'},
+                        { value: 'Doing', label: 'Doing'},
+                        { value: 'Done', label: 'Done'}
+                        ]}
+                        className="ml-20 w-1/4"
+                    />
+                    </div>
+
                     
-                <div className="mt-4 px-4 flex items-center">
+                {/* <div className="mt-4 px-4 flex items-center">
                     <IoPersonCircle  className="mr-2 ml-3 text-gray-400 text-xl" /> 
                     <p className="text-gray-400 mr-36">Author</p>
 
-                </div>
+                </div> */}
         
 
                 {/* task text */}

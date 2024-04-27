@@ -1,15 +1,16 @@
-import React , {useState, useEffect}from "react";
+import React , {useState}from "react";
 import SubtaskModal from "./SubtaskModal";
 
 
-function CreateSubtaskBtn({ taskId }) {
-console.log("taskId", taskId)
+function CreateSubtaskBtn({ taskId, status }) {
+// console.log("taskId", taskId)
+console.log("status", status)
   const [ showModal, setModal ] = useState(false)
-
 
   const handleClick = async () => {
     setModal(true)
   }
+
 
 
   return (
@@ -24,7 +25,7 @@ console.log("taskId", taskId)
         <span className="ml-1 font-bold">New</span>
       </button>
 
-      <SubtaskModal showModal={showModal} setModal={setModal} taskId={taskId}/>
+      <SubtaskModal showModal={showModal} setModal={setModal} taskId={taskId} status={status}/>
     </div>
   )
 }

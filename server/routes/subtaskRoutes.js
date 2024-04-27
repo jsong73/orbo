@@ -25,13 +25,13 @@ router.get("/:id/subtasks", verifyToken, async (req, res) => {
 
 router.post("/:id/subtasks", verifyToken, async (req, res) => {
     try{
-        const { title, description, completed } = req.body;
+        const { title, description, status } = req.body;
 
         const taskId = req.params.id;
 
         const newSubtask = await pool.query(
-            "INSERT INTO subtasks(task_id, title, description, completed) VALUES  ($1, $2, $3, $4) RETURNING *",
-            [taskId, title, description, completed]
+            "INSERT INTO subtasks(task_id, title, description, status) VALUES  ($1, $2, $3, $4) RETURNING *",
+            [taskId, title, description, status]
         )
         console.log(newSubtask.rows[0])
 
@@ -45,14 +45,14 @@ router.post("/:id/subtasks", verifyToken, async (req, res) => {
 
 router.put("/:id/subtasks/:subtaskId", verifyToken, async (req, res) => {
     try{
-        const { title, description, completed } = req.body;
+        const { title, description, status } = req.body;
 
         const taskId = req.params.id;
         const subtaskId = req.params.subtaskId;
 
         const updatedSubtask = await pool.query(
-            "UPDATE subtasks SET title = $1, description = $2, completed = $3 WHERE id = $4 AND task_id = $5 RETURNING *",
-            [title, description, completed, subtaskId, taskId]
+            "UPDATE subtasks SET title = $1, description = $2, status = $3 WHERE id = $4 AND task_id = $5 RETURNING *",
+            [title, description, status, subtaskId, taskId]
         )
        
         if(updatedSubtask.rows.length === 0){

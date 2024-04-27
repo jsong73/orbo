@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS subtasks (
     task_id INTEGER NOT NULL,
     title VARCHAR(50) NOT NULL,
     description TEXT,
-    completed BOOLEAN,
+    status VARCHAR(25) NOT NULL,
     FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 );
 
