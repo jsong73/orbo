@@ -80,9 +80,9 @@ import axios from "axios";
         }
     }
 
-    export const addSubtask = async(id, token) => {
+    export const addSubtask = async(id, subtaskData, token) => {
         try {
-            const res = await axios.post(`${baseURL}/tasks/${id}/subtasks`,{
+            const res = await axios.post(`${baseURL}/tasks/${id}/subtasks`, subtaskData, {
                 headers: {
                     Authorization: `Bearer ${token}` 
                 }
@@ -93,3 +93,17 @@ import axios from "axios";
             console.log(error)
         }
     }
+
+    // export const getMe = async(userId, token) => {
+    //     try {
+    //         const res = await axios.get(`${baseURL}/tasks/profile/${userId}`,{
+    //             headers: {
+    //                 Authorization: `Bearer ${token}` 
+    //             }
+    //         })
+    //         // console.log("res", res.data)
+    //         return res.data;
+    //     } catch (error){
+    //         console.log(error)
+    //     }
+    // }

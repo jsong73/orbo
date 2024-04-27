@@ -60,7 +60,9 @@ return (
     <p className="text-sm">Click an existing task to add additional context or subtasks.</p>
 
     
-    <SubtaskCard todo="To Do"
+    <SubtaskCard 
+                taskId={taskIdData.id}
+                todo="To Do"
                 doing="Doing"
                 done="Done"  
     />

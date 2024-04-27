@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { pool } = require("../db/connection");
+const {verifyToken} = require("../utils/auth");
 
 router.get("/:id/subtasks", verifyToken, async (req, res) => {
     try{
@@ -65,7 +66,7 @@ router.put("/:id/subtasks/:subtaskId", verifyToken, async (req, res) => {
     }
 })
 
-router.delete("/:id/subtasks/:subtaskId", verifyToken, async (req, res) => {
+router.delete("/:id/subtasks/:subtaskId",  verifyToken, async (req, res) => {
     try{
         const taskId = req.params.id;
         const subtaskId = req.params.subtaskId;
@@ -82,6 +83,23 @@ router.delete("/:id/subtasks/:subtaskId", verifyToken, async (req, res) => {
         res.json({ message: "Subtask deleted", subtask: deletedSubtask.rows[0] });
 
     } catch(error){
+        console.log(error)
+    }
+})
+
+router.get("/profile/:userId", verifyToken, async (req,res) => {
+    try{
+        const userId = req.params.userId
+
+        const user = await pool.query("SELECT name, email FROM users WHERE id = $1", [userId]);
+
+        if (user.rows.length === 0) {
+            return res.json({ message: "User not found" });
+        }
+
+        res.json(user.rows[0]);
+
+    }catch(error){
         console.log(error)
     }
 })

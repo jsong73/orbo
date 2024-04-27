@@ -1,8 +1,8 @@
 import React from "react";
 import CreateSubtaskBtn from "./CreateSubtaskBtn"
 
-function SubtaskCard({ todo, doing, done }) {
-
+function SubtaskCard({ todo, doing, done, taskId }) {
+console.log("taskId" , taskId)
 // console.log("props", todo, doing, done)
 
 return (
@@ -16,7 +16,7 @@ return (
             <div className="p-6 relative flex flex-col justify-end"></div>
           
           </div>
-          <CreateSubtaskBtn />
+          <CreateSubtaskBtn taskId={taskId} />
         </div>
 
    
@@ -27,7 +27,7 @@ return (
             <div className="p-6 relative flex flex-col justify-end"></div>
      
           </div>
-          <CreateSubtaskBtn />
+          <CreateSubtaskBtn taskId={taskId}/>
         </div>
  
 
@@ -38,7 +38,7 @@ return (
             <div className="p-6 relative flex flex-col justify-end"></div>
 
           </div>
-          <CreateSubtaskBtn />
+          <CreateSubtaskBtn taskId={taskId}/>
         </div>
 
 

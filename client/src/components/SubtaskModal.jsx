@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import Auth from "../../utils/auth"
 import { FaRegClock } from "react-icons/fa6";
-import { TbStatusChange } from "react-icons/tb";
 import { GrUploadOption } from "react-icons/gr";
 import { addSubtask } from "../../utils/api"; 
 import { IoPersonCircle } from "react-icons/io5";
 
+function SubtaskModal({showModal, setModal, taskId}) {
 
-function SubtaskModal({showModal, setModal}) {
-
+  console.log("did taskId make it here?", taskId)
     const [ title, setTitle ] = useState("")
     const [ description, setDescription] = useState("")
+
 
     const handleClick = async () => {
         setModal(false)
@@ -18,7 +18,7 @@ function SubtaskModal({showModal, setModal}) {
         try{
             const token = Auth.getToken();
 
-            const newSubtask = await addSubtask({ title: title, description: description}, token)
+            const newSubtask = await addSubtask(taskId, { title: title, description: description }, token);
 
             console.log("new subtask", newSubtask)
 
@@ -29,8 +29,7 @@ function SubtaskModal({showModal, setModal}) {
     
 
     const today =  new Date().toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' });
-    const username =  Auth.getProfile()
-    console.log("username", username)
+
     // console.log(today)
 
 
@@ -82,7 +81,7 @@ function SubtaskModal({showModal, setModal}) {
                 <div className="ml-2 mt-4 px-4 h-full">
                     <h2 className="mt-8 font-semibold text-xl !text-gray-500">Description</h2>
                     <textarea  
-                        className="mt-8 w-full h-5/6 whitespace-normal focus:outline-none" 
+                        className="mt-8 w-full h-4/6 whitespace-normal focus:outline-none" 
                         placeholder="Write something here ☺" 
                         type="text"
                         value={description}

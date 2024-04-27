@@ -115,7 +115,7 @@ return (
             
         ))}
         <div className="relative h-64 bg-white py-6 px-6 rounded-3xl w-80 flex items-center       justify-center my-4 shadow-xl hover:bg-blue-100 transition duration-300 ">
-          <CreateTaskBtn  />
+          <CreateTaskBtn />
         </div>
     
     

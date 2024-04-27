@@ -71,22 +71,7 @@ router.post("/login", async (req, res) => {
     }
 })
 
-router.get("/:userId", async (req,res) => {
-    try{
-        const userId = req.params.userId
 
-        const user = await pool.query("SELECT name, email FROM users WHERE id = $1", [userId]);
-
-        if (user.rows.length === 0) {
-            return res.json({ message: "User not found" });
-        }
-
-        res.json(user.rows[0]);
-
-    }catch(error){
-        console.log(error)
-    }
-})
 
 
 

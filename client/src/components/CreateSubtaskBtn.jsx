@@ -1,13 +1,14 @@
-import React , {useState}from "react";
+import React , {useState, useEffect}from "react";
 import SubtaskModal from "./SubtaskModal";
 
-function CreateSubtaskBtn() {
 
+function CreateSubtaskBtn({ taskId }) {
+console.log("taskId", taskId)
   const [ showModal, setModal ] = useState(false)
 
-  const handleClick = () => {
-    setModal(true)
 
+  const handleClick = async () => {
+    setModal(true)
   }
 
 
@@ -23,7 +24,7 @@ function CreateSubtaskBtn() {
         <span className="ml-1 font-bold">New</span>
       </button>
 
-      <SubtaskModal showModal={showModal} setModal={setModal} />
+      <SubtaskModal showModal={showModal} setModal={setModal} taskId={taskId}/>
     </div>
   )
 }
