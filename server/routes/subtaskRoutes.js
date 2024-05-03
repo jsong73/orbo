@@ -6,7 +6,9 @@ const {verifyToken} = require("../utils/auth");
 router.get("/:id/subtasks", verifyToken, async (req, res) => {
     try{
         const taskId = req.params.id;
-
+        
+        console.log("req.params", req.params);
+        console.log("is there something here", taskId)
         const subtasks = await pool.query(
             "SELECT * FROM subtasks WHERE task_id = $1",
             [taskId]
@@ -14,9 +16,9 @@ router.get("/:id/subtasks", verifyToken, async (req, res) => {
 
         if(subtasks.rows.length === 0){
             res.json({ message: "No subtasks created"})
+        } else {
+            res.json(subtasks.rows)
         }
-
-        res.json(subtasks.rows)
 
     } catch (error){
         console.log(error)
@@ -87,22 +89,22 @@ router.delete("/:id/subtasks/:subtaskId",  verifyToken, async (req, res) => {
     }
 })
 
-router.get("/profile/:userId", verifyToken, async (req,res) => {
-    try{
-        const userId = req.params.userId
+// router.get("/profile/:userId", verifyToken, async (req,res) => {
+//     try{
+//         const userId = req.params.userId
 
-        const user = await pool.query("SELECT name, email FROM users WHERE id = $1", [userId]);
+//         const user = await pool.query("SELECT name, email FROM users WHERE id = $1", [userId]);
 
-        if (user.rows.length === 0) {
-            return res.json({ message: "User not found" });
-        }
+//         if (user.rows.length === 0) {
+//             return res.json({ message: "User not found" });
+//         }
 
-        res.json(user.rows[0]);
+//         res.json(user.rows[0]);
 
-    }catch(error){
-        console.log(error)
-    }
-})
+//     }catch(error){
+//         console.log(error)
+//     }
+// })
 
 
 module.exports = router;

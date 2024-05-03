@@ -73,6 +73,7 @@ import axios from "axios";
                     Authorization: `Bearer ${token}` 
                 }
             })
+
             console.log("res", res.data)
             return res.data;
         } catch (error){
