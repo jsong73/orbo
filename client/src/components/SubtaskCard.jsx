@@ -36,7 +36,7 @@ useEffect(() => {
           switch (subtask.status) {
             case "To Do":
               todo.push(subtask);
-              // console.log("todos", todoS)
+              // console.log("todos", todo)
               break;
             case "Doing":
               doing.push(subtask);

@@ -5,8 +5,6 @@ import { GrUploadOption } from "react-icons/gr";
 import { addSubtask } from "../../utils/api"; 
 import { IoPersonCircle } from "react-icons/io5";
 import { TbStatusChange } from "react-icons/tb";
-
-
 import Select from 'react-select';
 
 function SubtaskModal({showModal, setModal, taskId, status }) {
@@ -14,19 +12,23 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
   // console.log("did taskId make it here?", taskId)
     const [ title, setTitle ] = useState("")
     const [ description, setDescription] = useState("")
-    const [ subtaskStatus, setSubtaskStatus] = useState("To Do")
+    const [ subtaskStatus, setSubtaskStatus] = useState(status)
 
     const handleClose = () => {
       setModal(false)
     }
 
+    useEffect(() => {
+      setSubtaskStatus(status)
+    }, [status])
+
     const handleClick = async () => {
         setModal(false)
-        // console.log("setModal?", setModal)
+
         try{
             const token = Auth.getToken();
 
-            const newSubtask = await addSubtask(taskId, { title: title, description: description, status: status }, token);
+            const newSubtask = await addSubtask(taskId, { title: title, description: description, status: subtaskStatus }, token);
 
             console.log("new subtask", newSubtask)
     
@@ -43,7 +45,6 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
     const today =  new Date().toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' });
 
     // console.log(today)
-
 
   return (
     <>
@@ -92,7 +93,6 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
                             <p className="text-gray-400">Status</p>
                         </div>
                     <Select
-                        placeholder="Select"
                         value={{ value: subtaskStatus, label: subtaskStatus }}
                         onChange={(option) => setSubtaskStatus(option.value)}
                         options={[
