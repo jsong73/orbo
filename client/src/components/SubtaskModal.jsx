@@ -3,7 +3,6 @@ import Auth from "../../utils/auth"
 import { FaRegClock } from "react-icons/fa6";
 import { GrUploadOption } from "react-icons/gr";
 import { addSubtask } from "../../utils/api"; 
-import { IoPersonCircle } from "react-icons/io5";
 import { TbStatusChange } from "react-icons/tb";
 import Select from 'react-select';
 
