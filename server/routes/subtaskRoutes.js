@@ -6,13 +6,14 @@ const {verifyToken} = require("../utils/auth");
 router.get("/:id/subtasks", verifyToken, async (req, res) => {
     try{
         const taskId = req.params.id;
-        
-        console.log("req.params", req.params);
-        console.log("is there something here", taskId)
+        // console.log("req params:", req.params);
+        // console.log("task ID:", taskId);
+
         const subtasks = await pool.query(
             "SELECT * FROM subtasks WHERE task_id = $1",
             [taskId]
         );
+        // console.log("subtasks:", subtasks.rows); 
 
         if(subtasks.rows.length === 0){
             res.json({ message: "No subtasks created"})
@@ -21,7 +22,8 @@ router.get("/:id/subtasks", verifyToken, async (req, res) => {
         }
 
     } catch (error){
-        console.log(error)
+        console.log("error", error); 
+        res.status(500).json({ error: "Internal server error" });
     }
 })
 

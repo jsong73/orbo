@@ -4,56 +4,84 @@ import Auth from "../../utils/auth"
 import { subtasks } from "../../utils/api";
 
 function SubtaskCard({ todo, doing, done, taskId }) {
-console.log("  this is taskId" , taskId)
+// console.log(" this is taskId" , taskId)
 // console.log("props", todo, doing, done)
 const [todoSubtasks, setTodoSubtasks] = useState([]);
 const [doingSubtasks, setDoingSubtasks] = useState([]);
 const [doneSubtasks, setDoneSubtasks] = useState([]);
+const [loading, setLoading] = useState(true)
 
 
 useEffect(() => {
   const getSubtasks = async () => {
 
     try {
+
+      if(!taskId) {
+        setLoading(false)
+        return;
+      }
+
       const token = Auth.getToken();
   
-
         const subtasksData = await subtasks(taskId, token);
         console.log("subtasksData", subtasksData)
 
-        setTodoSubtasks([]);
-        setDoingSubtasks([]);
-        setDoneSubtasks([]);
+        const todo = [];
+        const doing = [];
+        const done = [];
 
       
         subtasksData.forEach(subtask => {
           switch (subtask.status) {
             case "To Do":
-              setTodoSubtasks(prevState => [...prevState, subtask]);
-              // console.log("todos", todoSubtasks)
+              todo.push(subtask);
+              // console.log("todos", todoS)
               break;
             case "Doing":
-              setDoingSubtasks(prevState => [...prevState, subtask]);
-              // console.log("doing", doingSubtasks)
+              doing.push(subtask);
+              // console.log("doing", doing)
               break;
             case "Done":
-              setDoneSubtasks(prevState => [...prevState, subtask]);
-              // console.log("done", doneSubtasks)
+              done.push(subtask);
+              // console.log("done", done)
               break;
             default:
               // console.log("status", subtask.status);
           }
         });
 
+        setTodoSubtasks(todo);
+        setDoingSubtasks(doing);
+        setDoneSubtasks(done);
+        setLoading(false);
 
     } catch (error) {
       console.log(error)
+      setLoading(false);
     }
   
   }
   getSubtasks()
 },[taskId])
 
+
+if (loading) {
+  return (
+    <div class="flex items-center justify-center w-full h-full">
+	  <div class="flex justify-center items-center space-x-1 text-sm text-gray-700">
+		 
+				<svg fill='none' class="w-6 h-6 animate-spin" viewBox="0 0 32 32" xmlns='http://www.w3.org/2000/svg'>
+					<path clip-rule='evenodd'
+						d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
+						fill='currentColor' fill-rule='evenodd' />
+				</svg>
+
+		<div>Loading ...</div>
+	</div>
+</div>
+  )
+}
 
 return (
     <div>
