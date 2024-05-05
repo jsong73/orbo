@@ -1,5 +1,7 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
 function SideNav({ openSideNav , setOpenSideNav}) {
     console.log("show?", openSideNav)
 
@@ -22,53 +24,49 @@ function SideNav({ openSideNav , setOpenSideNav}) {
        <IoClose className="text-xl" />
     </button>
 
-
-      <a
-        href="#"
-        className="flex items-center space-x-1 rounded-md px-2 py-3 mt-12 hover:bg-gray-100 hover:text-blue-600"
-      >
+    <Link
+        to="/tasks"
+        className="flex items-center space-x-1 rounded-md px-2 py-4 mt-12 hover:bg-gray-100 hover:text-blue-600"
+    >
         <span className="text-2xl">
-          <i className="bx bx-home"></i>
+            <i className="bx bx-home"></i>
         </span>
         <span>Dashboard</span>
-      </a>
-      <a
-        href="#"
-        className="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
+    </Link>
+
+
+    <Link
+        to="/completed"
+        className="flex items-center space-x-1 rounded-md px-2 py-4 hover:bg-gray-100 hover:text-blue-600"
+    >
         <span className="text-2xl">
-          <i className="bx bx-cart"></i>
+            <i className="bx bx-home"></i>
         </span>
-        <span>Cart</span>
-      </a>
-      <a
-        href="#"
-        className="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
+        <span>Completed</span>
+    </Link>
+
+
+    <Link
+        to="#"
+        className="flex items-center space-x-1 rounded-md px-2 py-4 hover:bg-gray-100 hover:text-blue-600"
+    >
         <span className="text-2xl">
-          <i className="bx bx-shopping-bag"></i>
+            <i className="bx bx-home"></i>
         </span>
-        <span>Shopping</span>
-      </a>
-      <a
-        href="#"
-        className="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
+        <span>Calender</span>
+    </Link>
+
+
+    <Link
+        to="/tasks"
+        className="flex items-center space-x-1 rounded-md px-2 py-4 hover:bg-gray-100 hover:text-blue-600"
+    >
         <span className="text-2xl">
-          <i className="bx bx-heart"></i>
-        </span>
-        <span>My Favourite</span>
-      </a>
-      <a
-        href="#"
-        className="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
-        <span className="text-2xl">
-          <i className="bx bx-user"></i>
+            <i className="bx bx-home"></i>
         </span>
         <span>Profile</span>
-      </a>
-    </aside>
+    </Link>
+        </aside>
   );
 }
 

@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import Tasks from "./pages/Tasks"
+import Completed from "./pages/Completed"
 import TaskId from "./pages/TaskId"
 import "./index.css"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/tasks/:id",
         element: <TaskId />
+      },
+      {
+        path: "/completed",
+        element: <Completed />
       }
     ]
   }
