@@ -3,6 +3,7 @@ import CreateSubtaskBtn from "./CreateSubtaskBtn"
 import Auth from "../../utils/auth"
 import { subtasks } from "../../utils/api";
 import { DragDropContext, Droppable, Draggable} from "react-beautiful-dnd"
+import DeleteBtn from "./DeleteBtn";
  
 function SubtaskCard({ todo, doing, done, taskId }) {
 // console.log(" this is taskId" , taskId)
@@ -93,10 +94,11 @@ return (
             <div className="p-3 relative flex flex-col justify-end "></div>
             {todoSubtasks && todoSubtasks.map((subtask, i ) => (
                 <div key={i}
-                  className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
+                  className="p-4 rounded-lg shadow-md bg-black/10 mb-2 "
                 >
+                  <DeleteBtn taskId={taskId} subtaskId={subtask.id}/>
                   <h2 className="text-lg font-semibold">{subtask.title}</h2>
-                  <div className="text-sm">{subtask.description}</div>
+                  {/* <div className="text-sm">{subtask.description}</div> */}
               </div>
             ))}
           </div>
@@ -112,8 +114,9 @@ return (
                 <div key={i}
                 className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
                 >
+                  <DeleteBtn taskId={taskId} subtaskId={subtask.id} />
                   <h2 className="text-lg font-semibold">{subtask.title}</h2>
-                  <p className="text-sm">{subtask.description}</p>
+                  {/* <p className="text-sm">{subtask.description}</p> */}
               </div>
               ))}
           </div>
@@ -129,8 +132,9 @@ return (
                 <div key={i}
                 className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
                 >
+                  <DeleteBtn taskId={taskId} subtaskId={subtask.id}/>
                   <h2 className="text-lg font-semibold">{subtask.title}</h2>
-                  <p className="text-sm">{subtask.description}</p>
+                  {/* <p className="text-sm">{subtask.description}</p> */}
               </div>
               ))}
           </div>

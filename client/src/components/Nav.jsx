@@ -2,6 +2,7 @@ import React from "react";
 // import Orbo from "../assets/Orbo.png"
 import { Link } from "react-router-dom"
 import Auth from "../../utils/auth"
+import { IoMenu } from "react-icons/io5";
 
 function Nav() {
 
@@ -14,19 +15,19 @@ function Nav() {
   return (
 
     <nav className="w-full flex relative justify-between items-center mx-auto px-8 h-20">
-    {/* logo */}
+  { loggedIn ? 
     <div className="inline-flex">
         <Link to="/">
             <div className="hidden md:block">
-            {/* <img style= {{ display: "block", height: "400px"}}src={Orbo} alt="Orbo" /> */}
+            <IoMenu />
             </div>
             <div className="block md:hidden">
                
             </div>
         </Link>
     </div>
-    {/* end of logo */}
-
+: <div></div>
+}
 
     {/* <!-- login --> */} 
     <div className="flex-initial">

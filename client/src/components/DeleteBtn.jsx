@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
 import Auth from "../../utils/auth"
-import { deleteTask } from "../../utils/api";
+import { deleteSubtask, deleteTask } from "../../utils/api";
 
-function DeleteBtn({taskId}) {
-    console.log("is taskID being passed down?", taskId)
+function DeleteBtn({taskId, subtaskId}) {
+// console.log("is taskID being passed down?", taskId)
+console.log("is subtaskID being passed down?", subtaskId)
   const [showModal, setModal] = useState(false);
 
   const handleToggleMenu = (event) => {
@@ -18,9 +19,14 @@ function DeleteBtn({taskId}) {
     try {
         const token = Auth.getToken();
 
-        await deleteTask(taskId, token)
-        window.location.reload();
-        
+        if(subtaskId) {
+            await deleteSubtask(taskId, subtaskId, token) 
+            window.location.reload();
+        } else {
+            await deleteTask(taskId, token)
+            window.location.reload();
+        }
+
     } catch (error){
         console.log(error)
     }
@@ -31,15 +37,15 @@ function DeleteBtn({taskId}) {
   };
 
   return (
-    <div>
-      <button onClick={handleToggleMenu}>
+    <div className="relative">
+      <button onClick={handleToggleMenu} className="absolute top-0 right-0">
         <CiMenuKebab />
       </button>
       {showModal && (
         <div className="absolute right-0 top-8 bg-white border border-gray-200 rounded-md shadow-md z-10 w-36 ">
           <ul>
             <li className="py-1 px-3 hover:bg-gray-100 cursor-pointer" onClick={handleClick}>
-              Delete Task
+              Delete
             </li>
             <li className="py-1 px-3 hover:bg-gray-100 cursor-pointer" onClick={handleCompleteTask}>
               Mark Complete

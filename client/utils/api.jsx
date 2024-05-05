@@ -109,6 +109,20 @@ import axios from "axios";
             console.log(error)
         }
     }
+    
+    export const deleteSubtask = async(id, subtaskId, token) => {
+        try {
+            const res = await axios.delete(`${baseURL}/tasks/${id}/subtasks/${subtaskId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            })
+            console.log("res", res.data)
+            return res.data;
+        } catch (error){
+            console.log(error)
+        }
+    }
 
     // export const getMe = async(userId, token) => {
     //     try {

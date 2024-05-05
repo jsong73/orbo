@@ -47,12 +47,12 @@ function Tasks() {
 
 return (
 
-<section className="container mx-auto px-8 py-8 lg:py-10">
+<section className="container mx-auto px-8 py-8 lg:py-10 ">
+  
    <h2 className="font-sans text-4xl font-semibold text-blue-gray-900 lg:!text-4xl" >Boards</h2>
 
    <p className="text-sm mt-3">Click <b>+ Create new board</b> to create a new workflow.</p>
     <p className="text-sm mb-10 ">Click an existing board to start creating tasks.</p>
-
 
 <div className="flex items-center justify-center">
 
