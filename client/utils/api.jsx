@@ -64,7 +64,22 @@ import axios from "axios";
             console.log(error)
         }
     }
+
+    export const deleteTask = async(id, token) => {
+        try{
+            const res = await axios.delete(`${baseURL}/tasks/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            })
+            console.log("res", res)
+            return res.data
+        }catch(error) {
+            console.log(error)
+        }
+    }
     
+
 
     export const subtasks = async(id, token) => {
         try {

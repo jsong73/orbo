@@ -8,16 +8,17 @@ import { GrHomeRounded } from "react-icons/gr";
 import { MdWorkOutline } from "react-icons/md";
 import CreateTaskBtn from "../components/CreateTaskBtn";
 import { BiCustomize } from "react-icons/bi";
+import DeleteBtn from "../components/DeleteBtn";
 
 function Tasks() {
 
   const [taskData, setTaskData] = useState([])
   // const [error, setError] = useState("")
 
-
   useEffect(() => {
     const getAllTasks = async () => {
       try {
+
         const token = Auth.getToken();
         const response = await tasks(token)
         // console.log("response", response)
@@ -57,8 +58,7 @@ return (
 
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
         {taskData.map((task, i) => (
-            <Link key={i} to={`/tasks/${task.id}`}>
-                <div  className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
+                <div  key={i}  className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
 
                 <div className={`text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6 
                 ${task.category === "Personal" ? "bg-pink-500" : ""}
@@ -75,6 +75,11 @@ return (
                 {task.category === "Other" && <BiCustomize className="h-8 w-8"/> }
                 </div>
 
+                <div className="absolute top-2 right-2 my-2">
+                  <DeleteBtn taskId={task.id} />
+                </div>
+
+                <Link to={`/tasks/${task.id}`}>
 
                 <div className="mt-8">
                     <p className="text-xl font-semibold my-2">{task.title}</p>
@@ -107,17 +112,14 @@ return (
                         </div>
                     </div>
                 </div>
+                </Link>
             </div>
-            </Link>
-
-
-            
+         
             
         ))}
         <div className="relative h-64 bg-white py-6 px-6 rounded-3xl w-80 flex items-center       justify-center my-4 shadow-xl hover:bg-blue-100 transition duration-300 ">
           <CreateTaskBtn />
         </div>
-    
     
     </div>
 </div>

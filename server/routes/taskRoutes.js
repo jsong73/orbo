@@ -15,7 +15,8 @@ router.post("/", verifyToken, async (req, res) => {
         "INSERT INTO tasks(user_id, title, description, completed, category, due_date, priority) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         [userId, title, description, completed, category, due_date, priority]
         );
-        // console.log(newTask.rows[0])
+        console.log("new task:", newTask.rows[0])
+        
          res.json({ message: "Task successfully created", task: newTask.rows[0]})
     }catch(error){
         console.log(error)
@@ -26,7 +27,7 @@ router.post("/", verifyToken, async (req, res) => {
 router.get("/", verifyToken, async (req, res) => {
     try{
         const userId = req.user.userId;
-        // console.log(userId)
+        // console.log("checking for userID", userId)
 
         const tasks = await pool.query(
             "SELECT * FROM tasks WHERE user_id = $1",

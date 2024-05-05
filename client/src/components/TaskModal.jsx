@@ -11,11 +11,14 @@ function TaskModal({ showModal, setModal }) {
     const [ title, setTitle ] = useState("")
     const [ description, setDescription] = useState("")
     const [ category, setCategory ] = useState("")
-    const [ priority, setPriority ] = useState("")
+    const [ priority, setPriority ] = useState(null)
+
+    const handleClose = () => {
+        setModal(false)
+    }
 
 
     const handleClick = async () => {
-        setModal(false)
         // console.log("open?", setModal)
         try{
             const token = Auth.getToken();
@@ -48,7 +51,7 @@ function TaskModal({ showModal, setModal }) {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
-                        <button onClick={handleClick} className="text-gray-500 hover:text-gray-700">
+                        <button onClick={handleClose} className="text-gray-500 hover:text-gray-700">
                             <span className="sr-only">Close</span>
                             <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>

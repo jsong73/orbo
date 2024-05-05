@@ -2,7 +2,8 @@ import React , {useState, useEffect} from "react";
 import CreateSubtaskBtn from "./CreateSubtaskBtn"
 import Auth from "../../utils/auth"
 import { subtasks } from "../../utils/api";
-
+import { DragDropContext, Droppable, Draggable} from "react-beautiful-dnd"
+ 
 function SubtaskCard({ todo, doing, done, taskId }) {
 // console.log(" this is taskId" , taskId)
 // console.log("props", todo, doing, done)
@@ -64,7 +65,6 @@ useEffect(() => {
   }
   getSubtasks()
 },[taskId])
-
 
 if (loading) {
   return (
