@@ -5,7 +5,7 @@ import { deleteSubtask, deleteTask } from "../../utils/api";
 
 function DeleteBtn({taskId, subtaskId}) {
 // console.log("is taskID being passed down?", taskId)
-console.log("is subtaskID being passed down?", subtaskId)
+// console.log("is subtaskID being passed down?", subtaskId)
   const [showModal, setModal] = useState(false);
 
   const handleToggleMenu = (event) => {

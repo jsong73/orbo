@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 // import Orbo from "../assets/Orbo.png"
 import { Link } from "react-router-dom"
 import Auth from "../../utils/auth"
 import { IoMenu } from "react-icons/io5";
+import SideNav from "./SideNav";
 
 function Nav() {
+  const [ openSideNav, setOpenSideNav] = useState(false)
 
   const loggedIn = Auth.loggedIn();
 
@@ -12,22 +14,24 @@ function Nav() {
     Auth.logout();
   }
 
+  const showSideNav = () => {
+    setOpenSideNav(true)
+  }
+
   return (
 
     <nav className="w-full flex relative justify-between items-center mx-auto px-8 h-20">
-  { loggedIn ? 
+  { loggedIn ? (
     <div className="inline-flex">
-        <Link to="/">
             <div className="hidden md:block">
-            <IoMenu />
+            <IoMenu  className="text-xl" onClick={showSideNav} />
             </div>
-            <div className="block md:hidden">
-               
-            </div>
-        </Link>
     </div>
-: <div></div>
-}
+) : ( 
+<div></div>
+)}
+
+    <SideNav openSideNav={openSideNav} setOpenSideNav={setOpenSideNav}/>
 
     {/* <!-- login --> */} 
     <div className="flex-initial">

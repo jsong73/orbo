@@ -4,7 +4,7 @@ import SubtaskModal from "./SubtaskModal";
 
 function CreateSubtaskBtn({ taskId, status }) {
 // console.log("taskId", taskId)
-console.log("status", status)
+// console.log("status", status)
   const [ showModal, setModal ] = useState(false)
 
   const handleClick = async () => {

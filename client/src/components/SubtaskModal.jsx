@@ -7,7 +7,7 @@ import { TbStatusChange } from "react-icons/tb";
 import Select from 'react-select';
 
 function SubtaskModal({showModal, setModal, taskId, status }) {
-  console.log("this is status", status)
+  // console.log("this is status", status)
   // console.log("did taskId make it here?", taskId)
     const [ title, setTitle ] = useState("")
     const [ description, setDescription] = useState("")
