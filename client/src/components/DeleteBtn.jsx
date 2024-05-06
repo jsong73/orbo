@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
 import Auth from "../../utils/auth"
-import { deleteSubtask, deleteTask } from "../../utils/api";
+import { deleteSubtask, deleteTask , updateTask} from "../../utils/api";
 
 function DeleteBtn({taskId, subtaskId}) {
+
+const token = Auth.getToken();
+
 // console.log("is taskID being passed down?", taskId)
 // console.log("is subtaskID being passed down?", subtaskId)
   const [showModal, setModal] = useState(false);
@@ -15,10 +18,7 @@ function DeleteBtn({taskId, subtaskId}) {
 
   const handleClick = async () => {
     setModal(false);
-
     try {
-        const token = Auth.getToken();
-
         if(subtaskId) {
             await deleteSubtask(taskId, subtaskId, token) 
             window.location.reload();
@@ -32,8 +32,28 @@ function DeleteBtn({taskId, subtaskId}) {
     }
   };
 
-  const handleCompleteTask = () => {
+  const handleCompleteTask = async () => {
     setModal(false);
+    try{
+        await updateTask(taskId, { completed: true}, token)
+        window.location.reload();
+    } catch(error) {
+        console.log(error)
+    }
+  };
+
+  const displayCompleteBtn = () => {
+    if (!subtaskId) {
+      return (
+        <li
+          className="py-1 px-3 hover:bg-gray-100 cursor-pointer"
+          onClick={handleCompleteTask}
+        >
+          Mark Complete
+        </li>
+      );
+    }
+    return null;
   };
 
   return (
@@ -47,9 +67,7 @@ function DeleteBtn({taskId, subtaskId}) {
             <li className="py-1 px-3 hover:bg-gray-100 cursor-pointer" onClick={handleClick}>
               Delete
             </li>
-            <li className="py-1 px-3 hover:bg-gray-100 cursor-pointer" onClick={handleCompleteTask}>
-              Mark Complete
-            </li>
+            {displayCompleteBtn()}
           </ul>
         </div>
       )}

@@ -78,6 +78,20 @@ import axios from "axios";
             console.log(error)
         }
     }
+
+    export const updateTask = async(id, taskData, token) => {
+        try{
+            const res = await axios.put(`${baseURL}/tasks/${id}`, taskData, {
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            })
+            console.log("res", res)
+            return res.data
+        }catch(error) {
+            console.log(error)
+        }
+    }
     
 
 

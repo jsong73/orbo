@@ -69,15 +69,15 @@ router.get("/:id", verifyToken, async (req, res) => {
 
 router.put("/:id", verifyToken, async (req, res) => {
     try{
-        const { title, description, completed, category, due_date, priority } = req.body;
+        const { completed } = req.body;
 
         const taskId = req.params.id;
         const userId = req.user.userId;
 
         // console.log("userid", userId)
         const updatedTask = await pool.query(
-            "UPDATE tasks SET user_id = $1, title = $2, description = $3, completed = $4, category = $5, due_date = $6, priority = $7 WHERE id = $8 RETURNING *",
-            [userId, title, description, completed, category, due_date, priority, taskId]
+            "UPDATE tasks SET completed = $1 WHERE id = $2 AND user_id = $3 RETURNING *",
+            [completed, taskId, userId]
         )
         // console.log(updatedTask.rows[0])
 

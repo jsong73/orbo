@@ -32,6 +32,7 @@ function Tasks() {
         const filteredTasksByDate = response.slice().sort((a,b) =>{
           return new Date(b.created_at) - new Date(a.created_at);
         })
+
           setTaskData(filteredTasksByDate);
           // setError("");
 
@@ -44,7 +45,9 @@ function Tasks() {
     getAllTasks()
   }, [])
 
-
+  const openTasks = taskData.filter((task) => task.completed === false || task.completed === null  )
+// console.log("tasks", taskData)
+// console.log("open tasks", openTasks)
 return (
 
 <section className="container mx-auto px-8 py-8 lg:py-10 ">
@@ -57,7 +60,7 @@ return (
 <div className="flex items-center justify-center">
 
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
-        {taskData.map((task, i) => (
+        {openTasks.map((task, i) => (
                 <div  key={i}  className="relative bg-white py-6 px-6 rounded-3xl w-80 my-4 shadow-xl">
 
                 <div className={`text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl left-4 -top-6 
@@ -76,7 +79,7 @@ return (
                 </div>
 
                 <div className="absolute top-2 right-2 my-2">
-                  <DeleteBtn taskId={task.id} />
+                  <DeleteBtn taskId={task.id}/>
                 </div>
 
                 <Link to={`/tasks/${task.id}`}>
