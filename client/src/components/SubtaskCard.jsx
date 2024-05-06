@@ -1,17 +1,24 @@
-import React , {useState, useEffect} from "react";
+import React , {useState, useEffect, useRef} from "react";
 import CreateSubtaskBtn from "./CreateSubtaskBtn"
-import Auth from "../../utils/auth"
 import { subtasks } from "../../utils/api";
-import { DragDropContext, Droppable, Draggable} from "react-beautiful-dnd"
 import DeleteBtn from "./DeleteBtn";
+import { motion } from "framer-motion";
+import {updateSubTask} from "../../utils/api"
+import Auth from "../../utils/auth"
+
+
  
 function SubtaskCard({ todo, doing, done, taskId }) {
+
+  const token = Auth.getToken()
 // console.log(" this is taskId" , taskId)
 // console.log("props", todo, doing, done)
 const [todoSubtasks, setTodoSubtasks] = useState([]);
 const [doingSubtasks, setDoingSubtasks] = useState([]);
 const [doneSubtasks, setDoneSubtasks] = useState([]);
 const [loading, setLoading] = useState(true)
+
+const constraintsRef = useRef(null);
 
 
 useEffect(() => {
@@ -23,8 +30,6 @@ useEffect(() => {
         setLoading(false)
         return;
       }
-
-      const token = Auth.getToken();
   
         const subtasksData = await subtasks(taskId, token);
         // console.log("subtasksData", subtasksData)
@@ -73,6 +78,43 @@ useEffect(() => {
   getSubtasks()
 },[taskId])
 
+
+// const handleDrag = async (subtaskId, newStatus) => {
+
+//   const draggedSubtask = todoSubtasks.find((subtask) => subtask.id === subtaskId);
+//   console.log("dragged subtask", draggedSubtask)
+
+//   if (draggedSubtask) {
+//     try {
+
+//       const updatedSubTask = await updateSubTask(subtaskId, {status: newStatus}, token); 
+//       console.log("updated task" , updatedSubTask)
+  
+//       const updatedTodoSubtasks = todoSubtasks.filter((subtask) => subtask.id !== subtaskId);
+//       const updatedDoingSubtasks = doingSubtasks.filter((subtask) => subtask.id !== subtaskId);
+//       const updatedDoneSubtasks = doneSubtasks.filter((subtask) => subtask.id !== subtaskId);
+
+
+//       switch (newStatus) {
+//         case "To Do":
+//           setTodoSubtasks([...updatedTodoSubtasks, draggedSubtask]);
+//           break;
+//         case "Doing":
+//           setDoingSubtasks([...updatedDoingSubtasks, draggedSubtask]);
+//           break;
+//         case "Done":
+//           setDoneSubtasks([...updatedDoneSubtasks, draggedSubtask]);
+//           break;
+//         default:
+//           break;
+//       }
+//     } catch (error) {
+//       console.log(error);
+  
+//     }
+//   }
+// };
+
 if (loading) {
   return (
     <div className="flex items-center justify-center w-full h-full">
@@ -99,13 +141,17 @@ return (
           <div className="bg-transparent text-gray-700 ">
             <div className="p-3 relative flex flex-col justify-end "></div>
             {todoSubtasks && todoSubtasks.map((subtask, i ) => (
-                <div key={i}
-                  className="p-4 rounded-lg shadow-md bg-black/10 mb-2 "
+                <motion.div 
+                  key={i}  
+                  ref={constraintsRef}
+                  drag dragConstraints={constraintsRef}
+                  className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
+                  onDragEnd={() => handleDrag(subtask.id, "To Do")}
                 >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id}/>
                   <h2 className="text-lg font-semibold">{subtask.title}</h2>
                   {/* <div className="text-sm">{subtask.description}</div> */}
-              </div>
+                </motion.div>
             ))}
           </div>
           <CreateSubtaskBtn taskId={taskId} status="To Do" />
@@ -117,13 +163,17 @@ return (
           <div className="bg-transparent text-gray-700 ">
             <div className="p-3 relative flex flex-col justify-end"></div>
               {doingSubtasks && doingSubtasks.map((subtask, i) => (
-                <div key={i}
+              <motion.div 
+                key={i}  
+                ref={constraintsRef}
+                drag dragConstraints={constraintsRef}
                 className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
-                >
+                onDragEnd={() => handleDrag(subtask.id, "Doing")}
+               >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id} />
                   <h2 className="text-lg font-semibold">{subtask.title}</h2>
                   {/* <p className="text-sm">{subtask.description}</p> */}
-              </div>
+                </motion.div>
               ))}
           </div>
           <CreateSubtaskBtn taskId={taskId} status="Doing" />
@@ -135,13 +185,17 @@ return (
           <div className=" bg-transparent text-gray-700">
             <div className="p-3 relative flex flex-col justify-end"></div>
               {doneSubtasks && doneSubtasks.map((subtask, i) => (
-                <div key={i}
+              <motion.div 
+                key={i}  
+                ref={constraintsRef}
+                drag dragConstraints={constraintsRef}
                 className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
-                >
+                onDragEnd={() => handleDrag(subtask.id, "Done")}
+              >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id}/>
                   <h2 className="text-lg font-semibold">{subtask.title}</h2>
                   {/* <p className="text-sm">{subtask.description}</p> */}
-              </div>
+              </motion.div>
               ))}
           </div>
           <CreateSubtaskBtn taskId={taskId} status="Done" />

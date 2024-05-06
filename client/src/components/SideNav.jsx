@@ -47,7 +47,7 @@ function SideNav({ openSideNav , setOpenSideNav}) {
 
 
     <Link
-        to="#"
+        to="/calender"
         className="flex items-center space-x-1 rounded-md px-2 py-4 hover:bg-gray-100 hover:text-blue-600"
     >
         <span className="text-2xl">
@@ -57,15 +57,7 @@ function SideNav({ openSideNav , setOpenSideNav}) {
     </Link>
 
 
-    <Link
-        to="/tasks"
-        className="flex items-center space-x-1 rounded-md px-2 py-4 hover:bg-gray-100 hover:text-blue-600"
-    >
-        <span className="text-2xl">
-            <i className="bx bx-home"></i>
-        </span>
-        <span>Profile</span>
-    </Link>
+
         </aside>
   );
 }

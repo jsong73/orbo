@@ -8,6 +8,7 @@ import Login from "./pages/Login"
 import Tasks from "./pages/Tasks"
 import Completed from "./pages/Completed"
 import TaskId from "./pages/TaskId"
+import Calender from "./pages/Calender"
 import "./index.css"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/completed",
         element: <Completed />
+      },
+      {
+        path: "/calender",
+        element: <Calender />
       }
     ]
   }

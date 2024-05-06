@@ -138,16 +138,17 @@ import axios from "axios";
         }
     }
 
-    // export const getMe = async(userId, token) => {
-    //     try {
-    //         const res = await axios.get(`${baseURL}/tasks/profile/${userId}`,{
-    //             headers: {
-    //                 Authorization: `Bearer ${token}` 
-    //             }
-    //         })
-    //         // console.log("res", res.data)
-    //         return res.data;
-    //     } catch (error){
-    //         console.log(error)
-    //     }
-    // }
+    export const updateSubTask = async(id, subtaskId, token) => {
+        try {
+            const res = await axios.put(`${baseURL}/tasks/${id}/subtasks/${subtaskId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            })
+            console.log("res", res.data)
+            return res.data;
+        } catch (error){
+            console.log(error)
+        }
+    }
+
