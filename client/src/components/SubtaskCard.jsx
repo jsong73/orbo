@@ -1,9 +1,7 @@
 import React , {useState, useEffect, useRef} from "react";
 import CreateSubtaskBtn from "./CreateSubtaskBtn"
-import { subtasks } from "../../utils/api";
+import { subtasks , updateSubTask } from "../../utils/api";
 import DeleteBtn from "./DeleteBtn";
-import { motion } from "framer-motion";
-import {updateSubTask} from "../../utils/api"
 import Auth from "../../utils/auth"
 import { BiMessageRoundedDots } from "react-icons/bi";
 import SubtaskDetailsModal from "./SubtaskDetailsModal";
@@ -20,8 +18,6 @@ const [loading, setLoading] = useState(true)
 const [selectedSubtask, setSelectedSubtask] = useState(null); 
 const [showDetailsModal, setShowDetailsModal] = useState(false); 
 
-const constraintsRef = useRef(null);
-
 
 useEffect(() => {
   const getSubtasks = async () => {
@@ -32,6 +28,7 @@ useEffect(() => {
         setLoading(false)
         return;
       }
+      const token = Auth.getToken()
         const subtasksData = await subtasks(taskId, token);
         // console.log("subtasksData", subtasksData)
 
@@ -79,9 +76,12 @@ useEffect(() => {
 },[taskId])
 
 const handleShowDetails = (subtask) => {
+  // if (e.target.closest(".delete-btn")) return;
+
   setSelectedSubtask(subtask); 
   setShowDetailsModal(true); 
 }
+
 
 
 return (
@@ -93,23 +93,21 @@ return (
           <div className="bg-transparent text-gray-700 ">
             <div className="p-3 relative flex flex-col justify-end "></div>
             {todoSubtasks && todoSubtasks.map((subtask, i ) => (
-                <motion.div 
+                <div 
                   key={i}  
-                  ref={constraintsRef}
-                  drag dragConstraints={constraintsRef}
                   className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
-                  onDragEnd={() => handleDrag(subtask.id, "To Do")}
-                  onClick={() => handleShowDetails(subtask)}
                 >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id}/>
-                    <h2 className="text-lg font-semibold">{subtask.title}</h2>       
+                    <h2  
+                    onClick={() => handleShowDetails(subtask)}
+                    className="text-lg font-semibold">{subtask.title}</h2>       
                   {subtask.description && (
                     <div>
                       <BiMessageRoundedDots  />
                     </div>
                   )}
            
-                </motion.div>
+                </div>
             ))}
           </div>
           <CreateSubtaskBtn taskId={taskId} status="To Do" />
@@ -121,22 +119,20 @@ return (
           <div className="bg-transparent text-gray-700 ">
             <div className="p-3 relative flex flex-col justify-end"></div>
               {doingSubtasks && doingSubtasks.map((subtask, i) => (
-              <motion.div 
+                <div 
                 key={i}  
-                ref={constraintsRef}
-                drag dragConstraints={constraintsRef}
                 className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
-                onDragEnd={() => handleDrag(subtask.id, "Doing")}
-                onClick={() => handleShowDetails(subtask)}
-               >
+                >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id} />
-                    <h2 className="text-lg font-semibold">{subtask.title}</h2>
+                    <h2 
+                     onClick={() => handleShowDetails(subtask)}
+                    className="text-lg font-semibold">{subtask.title}</h2>
                   {subtask.description && (
                     <div>
                       <BiMessageRoundedDots  />
                     </div>
                   )}
-                </motion.div>
+                </div>
               ))}
           </div>
           <CreateSubtaskBtn taskId={taskId} status="Doing" />
@@ -148,22 +144,20 @@ return (
           <div className=" bg-transparent text-gray-700">
             <div className="p-3 relative flex flex-col justify-end"></div>
               {doneSubtasks && doneSubtasks.map((subtask, i) => (
-              <motion.div 
+                <div 
                 key={i}  
-                ref={constraintsRef}
-                drag dragConstraints={constraintsRef}
                 className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
-                onDragEnd={() => handleDrag(subtask.id, "Done")}
-                onClick={() => handleShowDetails(subtask)}
               >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id}/>
-                    <h2 className="text-lg font-semibold">{subtask.title}</h2>
+                    <h2 
+                    onClick={() => handleShowDetails(subtask)}
+                    className="text-lg font-semibold">{subtask.title}</h2>
                   {subtask.description && (
                     <div>
                       <BiMessageRoundedDots  />
                     </div>
                   )}
-              </motion.div>
+              </div>
               ))}
           </div>
           <CreateSubtaskBtn taskId={taskId} status="Done" />
@@ -174,6 +168,7 @@ return (
         setShowDetailsModal={setShowDetailsModal}
         subtask={selectedSubtask}
       />
+
       </div>
     </div>
   );

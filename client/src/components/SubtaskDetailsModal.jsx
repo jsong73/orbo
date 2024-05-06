@@ -1,9 +1,11 @@
 import React from "react";
 import { TbStatusChange } from "react-icons/tb";
+import DeleteBtn from "./DeleteBtn";
 
 function SubtaskDetailsModal({showDetailsModal, setShowDetailsModal, subtask}) {
 
-console.log("subtask being passed down?", subtask)
+// console.log("subtask being passed down?", subtask)
+
     const handleClose = () => {
         setShowDetailsModal(false)
     }
@@ -20,8 +22,7 @@ console.log("subtask being passed down?", subtask)
                 <div className="h-full flex flex-col py-6 bg-white shadow-xl">
                   <div className="flex items-center justify-between px-4">
 
-
-                <div className="ml-2 text-3xl font-bold border-none w-full h-20" >
+                <div className="ml-2 mt-8 text-3xl font-bold border-none w-full h-20" >
                     {subtask.title}
                 </div>
                 

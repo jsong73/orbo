@@ -1,5 +1,5 @@
 import React from "react";
-
+import Boards from "../assets/boards.png"
 function Hero() {
 
 
@@ -8,11 +8,11 @@ return (
     <div className="flex flex-col px-8 mx-auto space-y-12 max-w-7xl xl:px-12">
         <div className="relative">
             <h2 className="w-full text-3xl font-bold text-center sm:text-4xl md:text-5xl"> Unlock Your Task Potential </h2>
-            <p className="w-full py-8 mx-auto -mt-2 text-lg text-center text-gray-700 intro sm:max-w-3xl">Add some nice touches to your interface with our latest designs, components, and templates. We've crafted a beautiful user experience that your visitors will love. </p>
+            <p className="w-full py-8 mx-auto -mt-2 text-lg text-center text-gray-700 intro sm:max-w-3xl">Start creating tasks effortlessly. Simplify your workflow, streamline collaboration, and achieve more with ease. Experience productivity redefined. </p>
         </div>
         <div className="flex flex-col mb-8 animated fadeIn sm:flex-row">
             <div className="flex items-center mb-8 sm:w-1/2 md:w-5/12 sm:order-last">
-                <img className="rounded-lg shadow-xl" src="https://cdn.devdojo.com/images/december2020/dashboard-011.png" alt="" />
+                <img className="rounded-lg shadow-xl" src={Boards} alt="Boards" />
             </div>
             <div className="flex flex-col justify-center mt-5 mb-8 md:mt-0 sm:w-1/2 md:w-7/12 sm:pr-16">
                 <p className="mb-2 text-sm font-semibold leading-none text-left text-blue-500 uppercase">Drag-n-drop design</p>

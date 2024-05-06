@@ -16,7 +16,8 @@ const token = Auth.getToken();
     setModal(true);
   };
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
+    e.stopPropagation(); 
     setModal(false);
     try {
         if(subtaskId) {
@@ -78,7 +79,7 @@ const token = Auth.getToken();
         <CiMenuKebab />
       </button>
       {showModal && (
-        <div className="absolute right-0 top-8 bg-white border border-gray-200 rounded-md shadow-md z-10 w-36 " ref={menuRef}>
+        <div  id="deleteDropdown" className="absolute right-0 top-8 bg-white border border-gray-200 rounded-md shadow-md z-10 w-36 " ref={menuRef}>
           <ul>
             <li className="py-1 px-3 hover:bg-gray-100 cursor-pointer" onClick={handleClick}>
               Delete

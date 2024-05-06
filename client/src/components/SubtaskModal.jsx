@@ -58,7 +58,7 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
 
 
                 <input 
-                    className="ml-2 text-3xl font-bold border-none w-full h-20 focus:outline-none" placeholder="Untitled"
+                    className="ml-2  text-3xl font-bold border-none w-full h-20 focus:outline-none" placeholder="Untitled"
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}> 
