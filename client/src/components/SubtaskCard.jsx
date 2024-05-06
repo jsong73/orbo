@@ -5,8 +5,8 @@ import DeleteBtn from "./DeleteBtn";
 import { motion } from "framer-motion";
 import {updateSubTask} from "../../utils/api"
 import Auth from "../../utils/auth"
-
-
+import { BiMessageRoundedDots } from "react-icons/bi";
+import SubtaskDetailsModal from "./SubtaskDetailsModal";
  
 function SubtaskCard({ todo, doing, done, taskId }) {
 
@@ -17,6 +17,8 @@ const [todoSubtasks, setTodoSubtasks] = useState([]);
 const [doingSubtasks, setDoingSubtasks] = useState([]);
 const [doneSubtasks, setDoneSubtasks] = useState([]);
 const [loading, setLoading] = useState(true)
+const [selectedSubtask, setSelectedSubtask] = useState(null); 
+const [showDetailsModal, setShowDetailsModal] = useState(false); 
 
 const constraintsRef = useRef(null);
 
@@ -30,7 +32,6 @@ useEffect(() => {
         setLoading(false)
         return;
       }
-  
         const subtasksData = await subtasks(taskId, token);
         // console.log("subtasksData", subtasksData)
 
@@ -60,7 +61,6 @@ useEffect(() => {
               // console.log("done", done)
               break;
             default:
-              // console.log("status", subtask.status);
           }
         });
 
@@ -78,59 +78,11 @@ useEffect(() => {
   getSubtasks()
 },[taskId])
 
-
-// const handleDrag = async (subtaskId, newStatus) => {
-
-//   const draggedSubtask = todoSubtasks.find((subtask) => subtask.id === subtaskId);
-//   console.log("dragged subtask", draggedSubtask)
-
-//   if (draggedSubtask) {
-//     try {
-
-//       const updatedSubTask = await updateSubTask(subtaskId, {status: newStatus}, token); 
-//       console.log("updated task" , updatedSubTask)
-  
-//       const updatedTodoSubtasks = todoSubtasks.filter((subtask) => subtask.id !== subtaskId);
-//       const updatedDoingSubtasks = doingSubtasks.filter((subtask) => subtask.id !== subtaskId);
-//       const updatedDoneSubtasks = doneSubtasks.filter((subtask) => subtask.id !== subtaskId);
-
-
-//       switch (newStatus) {
-//         case "To Do":
-//           setTodoSubtasks([...updatedTodoSubtasks, draggedSubtask]);
-//           break;
-//         case "Doing":
-//           setDoingSubtasks([...updatedDoingSubtasks, draggedSubtask]);
-//           break;
-//         case "Done":
-//           setDoneSubtasks([...updatedDoneSubtasks, draggedSubtask]);
-//           break;
-//         default:
-//           break;
-//       }
-//     } catch (error) {
-//       console.log(error);
-  
-//     }
-//   }
-// };
-
-if (loading) {
-  return (
-    <div className="flex items-center justify-center w-full h-full">
-	  <div className="flex justify-center items-center space-x-1 text-sm text-gray-700">
-		 
-				<svg fill='none' className="w-6 h-6 animate-spin" viewBox="0 0 32 32" xmlns='http://www.w3.org/2000/svg'>
-					<path clipRule='evenodd'
-						d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
-						fill='currentColor' fillRule='evenodd' />
-				</svg>
-
-		<div>Loading ...</div>
-	</div>
-</div>
-  )
+const handleShowDetails = (subtask) => {
+  setSelectedSubtask(subtask); 
+  setShowDetailsModal(true); 
 }
+
 
 return (
     <div>
@@ -147,10 +99,16 @@ return (
                   drag dragConstraints={constraintsRef}
                   className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
                   onDragEnd={() => handleDrag(subtask.id, "To Do")}
+                  onClick={() => handleShowDetails(subtask)}
                 >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id}/>
-                  <h2 className="text-lg font-semibold">{subtask.title}</h2>
-                  {/* <div className="text-sm">{subtask.description}</div> */}
+                    <h2 className="text-lg font-semibold">{subtask.title}</h2>       
+                  {subtask.description && (
+                    <div>
+                      <BiMessageRoundedDots  />
+                    </div>
+                  )}
+           
                 </motion.div>
             ))}
           </div>
@@ -169,10 +127,15 @@ return (
                 drag dragConstraints={constraintsRef}
                 className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
                 onDragEnd={() => handleDrag(subtask.id, "Doing")}
+                onClick={() => handleShowDetails(subtask)}
                >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id} />
-                  <h2 className="text-lg font-semibold">{subtask.title}</h2>
-                  {/* <p className="text-sm">{subtask.description}</p> */}
+                    <h2 className="text-lg font-semibold">{subtask.title}</h2>
+                  {subtask.description && (
+                    <div>
+                      <BiMessageRoundedDots  />
+                    </div>
+                  )}
                 </motion.div>
               ))}
           </div>
@@ -191,17 +154,26 @@ return (
                 drag dragConstraints={constraintsRef}
                 className="p-4 rounded-lg shadow-md bg-black/10 mb-2"
                 onDragEnd={() => handleDrag(subtask.id, "Done")}
+                onClick={() => handleShowDetails(subtask)}
               >
                   <DeleteBtn taskId={taskId} subtaskId={subtask.id}/>
-                  <h2 className="text-lg font-semibold">{subtask.title}</h2>
-                  {/* <p className="text-sm">{subtask.description}</p> */}
+                    <h2 className="text-lg font-semibold">{subtask.title}</h2>
+                  {subtask.description && (
+                    <div>
+                      <BiMessageRoundedDots  />
+                    </div>
+                  )}
               </motion.div>
               ))}
           </div>
           <CreateSubtaskBtn taskId={taskId} status="Done" />
         </div>
 
-
+        <SubtaskDetailsModal
+        showDetailsModal={showDetailsModal}
+        setShowDetailsModal={setShowDetailsModal}
+        subtask={selectedSubtask}
+      />
       </div>
     </div>
   );

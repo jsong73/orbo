@@ -6,6 +6,7 @@ import { TbBook2 } from "react-icons/tb";
 import { GrHomeRounded } from "react-icons/gr";
 import { MdWorkOutline } from "react-icons/md";
 import { BiCustomize } from "react-icons/bi";
+import { Link } from "react-router-dom";
  
 function Completed() {
     const [completedTaskData, setCompletedTaskData] = useState([])
@@ -34,8 +35,8 @@ function Completed() {
   
     <h2 className="font-sans text-4xl font-semibold text-blue-gray-900 lg:!text-4xl" >Completed Boards</h2>
 
-    <p className="text-sm mt-3">Click <b>+ Create new board</b> to create a new workflow.</p>
-    <p className="text-sm mb-10 ">Click an existing board to start creating tasks.</p>
+    <p className="text-sm mt-3"> View your <b>completed</b> boards below.</p>
+    <p className="text-sm mb-10 ">Click a board to view past tasks.</p>
 
     <div className="flex items-center justify-center">
 
@@ -59,7 +60,7 @@ function Completed() {
                 {task.category === "Other" && <BiCustomize className="h-8 w-8"/> }
                 </div>
       
-
+        <Link to={`/tasks/${task.id}`}>
       
                 <div className="mt-8">
                     <p className="text-xl font-semibold my-2">{task.title}</p>
@@ -92,10 +93,11 @@ function Completed() {
                         </div>
                     </div>
                 </div>
+                </Link>
         </div>  
+
     ))}
-        
-           
+
  </div>
 
 </div>
