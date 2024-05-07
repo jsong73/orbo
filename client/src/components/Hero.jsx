@@ -1,5 +1,6 @@
 import React from "react";
 import Boards from "../assets/boards.png"
+import Tasks from "../assets/tasks.png"
 function Hero() {
 
 
@@ -12,7 +13,7 @@ return (
         </div>
         <div className="flex flex-col mb-8 animated fadeIn sm:flex-row">
             <div className="flex items-center mb-8 sm:w-1/2 md:w-5/12 sm:order-last">
-                <img className="rounded-lg shadow-xl" src={Boards} alt="Boards" />
+                <img className="rounded-lg shadow-xl" src={Tasks} alt="Boards" />
             </div>
             <div className="flex flex-col justify-center mt-5 mb-8 md:mt-0 sm:w-1/2 md:w-7/12 sm:pr-16">
                 <p className="mb-2 text-sm font-semibold leading-none text-left text-blue-500 uppercase">Drag-n-drop design</p>
@@ -22,12 +23,12 @@ return (
         </div>
         <div className="flex flex-col mb-8 animated fadeIn sm:flex-row">
             <div className="flex items-center mb-8 sm:w-1/2 md:w-5/12">
-                <img className="rounded-lg shadow-xl" src="https://cdn.devdojo.com/images/december2020/dashboard-04.png" alt="" />
+                <img className="rounded-lg shadow-xl" src={Boards} alt="Boards" />
             </div>
             <div className="flex flex-col justify-center mt-5 mb-8 md:mt-0 sm:w-1/2 md:w-7/12 sm:pl-16">
-                <p className="mb-2 text-sm font-semibold leading-none text-left text-blue-500 uppercase">know your data</p>
-                <h3 className="mt-2 text-2xl sm:text-left md:text-4xl">Optimized For Conversions</h3>
-                <p className="mt-5 text-lg text-gray-700 text md:text-left">Backed by data, these templates have been crafted for ultimate optimization. Now, converting your visitors into customers is easier than ever before.</p>
+                <p className="mb-2 text-sm font-semibold leading-none text-left text-blue-500 uppercase">Data Driven</p>
+                <h3 className="mt-2 text-2xl sm:text-left md:text-4xl">Optimized For Productivity</h3>
+                <p className="mt-5 text-lg text-gray-700 text md:text-left">Our board feature leverages data to streamline task management, optimizing workflows and driving efficient project execution.</p>
             </div>
         </div>
         <div className="flex flex-col mb-8 animated fadeIn sm:flex-row">

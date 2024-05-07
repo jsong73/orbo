@@ -76,8 +76,6 @@ useEffect(() => {
 },[taskId])
 
 const handleShowDetails = (subtask) => {
-  // if (e.target.closest(".delete-btn")) return;
-
   setSelectedSubtask(subtask); 
   setShowDetailsModal(true); 
 }
