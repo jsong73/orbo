@@ -1,6 +1,6 @@
 import React from "react";
 import { TbStatusChange } from "react-icons/tb";
-import DeleteBtn from "./DeleteBtn";
+
 
 function SubtaskDetailsModal({showDetailsModal, setShowDetailsModal, subtask}) {
 
@@ -42,8 +42,8 @@ function SubtaskDetailsModal({showDetailsModal, setShowDetailsModal, subtask}) {
                 <div className="mt-4 flex flex-col-2 ml-8">
                         <div className="flex items-center">
                             <TbStatusChange  className="mr-2 text-gray-400" />
-                            <p className="text-gray-400">Current Status</p>
-                            <div className="ml-20">{subtask.status}</div>
+                            <p className="text-gray-400">Current Status </p>
+                            <div className="ml-20 text-gray-700 text-md">{subtask.status} </div>
                         </div>
                     
                     </div>
@@ -51,8 +51,9 @@ function SubtaskDetailsModal({showDetailsModal, setShowDetailsModal, subtask}) {
 
                 <div className="ml-2 mt-4 px-4 h-full">
                     <h2 className="mt-8 font-semibold text-xl !text-gray-500">Description</h2>
-                    <div className="mt-8">{subtask.description}</div>
-
+                    {subtask.description ? 
+                    <div className="mt-8 text-md !text-gray-700 ">{subtask.description}</div> : <div className="mt-8 text-gray-400 italic">  No details provided </div>
+                    }
 
               
 

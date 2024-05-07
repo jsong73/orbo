@@ -5,10 +5,11 @@ import DeleteBtn from "./DeleteBtn";
 import Auth from "../../utils/auth"
 import { BiMessageRoundedDots } from "react-icons/bi";
 import SubtaskDetailsModal from "./SubtaskDetailsModal";
+
  
 function SubtaskCard({ todo, doing, done, taskId }) {
 
-  const token = Auth.getToken()
+
 // console.log(" this is taskId" , taskId)
 // console.log("props", todo, doing, done)
 const [todoSubtasks, setTodoSubtasks] = useState([]);
@@ -78,6 +79,8 @@ useEffect(() => {
 const handleShowDetails = (subtask) => {
   setSelectedSubtask(subtask); 
   setShowDetailsModal(true); 
+
+  // console.log("whats returning", subtask)
 }
 
 
