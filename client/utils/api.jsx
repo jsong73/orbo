@@ -138,11 +138,11 @@ import axios from "axios";
         }
     }
 
-    export const updateSubTask = async (id, subtaskId, token) => {
+    export const updateSubTask = async (id, subtaskId, destinationColumn, token) => {
         try {
             const res = await axios.put(
                 `${baseURL}/tasks/${id}/subtasks/${subtaskId}`,
-                {}, 
+                { status: destinationColumn }, 
                 {
                     headers: {
                         Authorization: `Bearer ${token}` 
@@ -152,6 +152,6 @@ import axios from "axios";
             console.log("res", res.data);
             return res.data;
         } catch (error) {
-            console.log(error);
+            console.error("Axios error:", error);
         }
     };

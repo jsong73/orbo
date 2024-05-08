@@ -45,15 +45,15 @@ useEffect(() => {
       
         subtasksData.forEach(subtask => {
           switch (subtask.status) {
-            case "To Do":
+            case "todo":
               todo.push(subtask);
               // console.log("todos", todo)
               break;
-            case "Doing":
+            case "doing":
               doing.push(subtask);
               // console.log("doing", doing)
               break;
-            case "Done":
+            case "done":
               done.push(subtask);
               // console.log("done", done)
               break;
@@ -89,54 +89,31 @@ const onDragEnd = async (result) => {
   }
 
   const originalColumn = source.droppableId;
-  console.log("originalColumn", originalColumn)
   const destinationColumn = destination.droppableId;
-  console.log("destinationColumn", destinationColumn)
-
   const subtaskId = result.draggableId;
-  console.log("subtaskID", subtaskId)
 
-  let updatedSubtasks = [];
-  let originalSubtasks = [];
-  switch (originalColumn) {
-    case "todo":
-      originalSubtasks = todoSubtasks;
-      break;
-    case "doing":
-      originalSubtasks = doingSubtasks;
-      break;
-    case "done":
-      originalSubtasks = doneSubtasks;
-      break;
-    default:
-  }
-  const movedSubtaskIndex = originalSubtasks.findIndex(subtask => subtask.id.toString() === subtaskId);
-  const movedSubtask = originalSubtasks[movedSubtaskIndex];
-  
+  const updatedSubtasks = {
+    todo: [...todoSubtasks],
+    doing: [...doingSubtasks],
+    done: [...doneSubtasks]
+  };
 
-  originalSubtasks.splice(movedSubtaskIndex, 1);
+  const movedSubtask = updatedSubtasks[originalColumn].find(subtask => subtask.id.toString() === subtaskId);
+  const movedSubtaskIndex = updatedSubtasks[originalColumn].indexOf(movedSubtask);
+  updatedSubtasks[originalColumn].splice(movedSubtaskIndex, 1);
 
 
   movedSubtask.status = destinationColumn;
 
-  switch (destinationColumn) {
-    case "todo":
-      updatedSubtasks = [...todoSubtasks, movedSubtask];
-      setTodoSubtasks(updatedSubtasks);
-      break;
-    case "doing":
-      updatedSubtasks = [...doingSubtasks, movedSubtask];
-      setDoingSubtasks(updatedSubtasks);
-      break;
-    case "done":
-      updatedSubtasks = [...doneSubtasks, movedSubtask];
-      setDoneSubtasks(updatedSubtasks);
-      break;
-    default:
-  }
+
+  updatedSubtasks[destinationColumn].push(movedSubtask);
+
+  setTodoSubtasks([...updatedSubtasks.todo]);
+  setDoingSubtasks([...updatedSubtasks.doing]);
+  setDoneSubtasks([...updatedSubtasks.done]);
 
   const token = Auth.getToken();
-  await updateSubTask(subtaskId, { status: destinationColumn }, token);
+  await updateSubTask(taskId, subtaskId, destinationColumn, token);
 };
 
 return (

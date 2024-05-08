@@ -49,14 +49,16 @@ router.post("/:id/subtasks", verifyToken, async (req, res) => {
 
 router.put("/:id/subtasks/:subtaskId", verifyToken, async (req, res) => {
     try{
-        const { title, description, status } = req.body;
+        const { status } = req.body;
 
         const taskId = req.params.id;
         const subtaskId = req.params.subtaskId;
+        // console.log("taskId:", taskId);
+        // console.log("subtaskId:", subtaskId);
 
         const updatedSubtask = await pool.query(
-            "UPDATE subtasks SET title = $1, description = $2, status = $3 WHERE id = $4 AND task_id = $5 RETURNING *",
-            [title, description, status, subtaskId, taskId]
+            "UPDATE subtasks SET status = $1 WHERE id = $2 AND task_id = $3 RETURNING *",
+            [status, subtaskId, taskId]
         )
        
         if(updatedSubtask.rows.length === 0){

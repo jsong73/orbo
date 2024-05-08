@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS tasks (
 CREATE TABLE IF NOT EXISTS subtasks (
     id SERIAL PRIMARY KEY,
     task_id INTEGER NOT NULL,
-    title VARCHAR(50) NOT NULL,
+    title VARCHAR(50),
     description TEXT,
     status VARCHAR(25) NOT NULL,
     FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE

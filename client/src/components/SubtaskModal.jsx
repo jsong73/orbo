@@ -95,9 +95,9 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
                         value={{ value: subtaskStatus, label: subtaskStatus }}
                         onChange={(option) => setSubtaskStatus(option.value)}
                         options={[
-                        { value: 'To Do', label: 'To Do'},
-                        { value: 'Doing', label: 'Doing'},
-                        { value: 'Done', label: 'Done'}
+                        { value: 'todo', label: 'To Do'},
+                        { value: 'doing', label: 'Doing'},
+                        { value: 'done', label: 'Done'}
                         ]}
                         className="ml-20 w-1/4"
                     />
