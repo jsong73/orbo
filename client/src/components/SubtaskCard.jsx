@@ -45,15 +45,15 @@ useEffect(() => {
       
         subtasksData.forEach(subtask => {
           switch (subtask.status) {
-            case "todo":
+            case "To Do":
               todo.push(subtask);
               // console.log("todos", todo)
               break;
-            case "doing":
+            case "Doing":
               doing.push(subtask);
               // console.log("doing", doing)
               break;
-            case "done":
+            case "Done":
               done.push(subtask);
               // console.log("done", done)
               break;
@@ -122,7 +122,7 @@ return (
       <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
 
         <div>
-          <h1 className="font-semibold text-xl">{todo}</h1>
+          <h1 className="font-semibold text-xl">To Do</h1>
           <Droppable droppableId="todo">
           {(provided) => ( 
           <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -161,7 +161,7 @@ return (
 
    
         <div>
-          <h1 className="font-semibold text-xl">{doing}</h1>
+          <h1 className="font-semibold text-xl">Doing</h1>
           <Droppable droppableId="doing">
           {(provided) => ( 
           <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -198,7 +198,7 @@ return (
         </div>
  
         <div>
-          <h1 className="font-semibold text-xl">{done}</h1>
+          <h1 className="font-semibold text-xl">Done</h1>
           <Droppable droppableId="done">
           {(provided) => ( 
           <div ref={provided.innerRef} {...provided.droppableProps}>

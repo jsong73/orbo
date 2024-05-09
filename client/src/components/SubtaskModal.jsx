@@ -19,6 +19,7 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
 
     useEffect(() => {
       setSubtaskStatus(status)
+      console.log("status",subtaskStatus)
     }, [status])
 
     const handleClick = async () => {
@@ -26,7 +27,7 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
 
         try{
             const token = Auth.getToken();
-
+          
             const newSubtask = await addSubtask(taskId, { title: title, description: description, status: subtaskStatus }, token);
 
             console.log("new subtask", newSubtask)
@@ -95,9 +96,9 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
                         value={{ value: subtaskStatus, label: subtaskStatus }}
                         onChange={(option) => setSubtaskStatus(option.value)}
                         options={[
-                        { value: 'todo', label: 'To Do'},
-                        { value: 'doing', label: 'Doing'},
-                        { value: 'done', label: 'Done'}
+                        { value: 'To Do', label: 'To Do'},
+                        { value: 'Doing', label: 'Doing'},
+                        { value: 'Done', label: 'Done'}
                         ]}
                         className="ml-20 w-1/4"
                     />
