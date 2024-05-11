@@ -21,9 +21,8 @@ function Tasks() {
 
         const token = Auth.getToken();
         const response = await tasks(token)
-        // console.log("response", response)
-        // console.log("taskData", taskData)
-
+        console.log("response", response)
+    
         if (typeof response.message === "string") {
           // setError(response.message);
           setTaskData([]); 
@@ -32,9 +31,11 @@ function Tasks() {
         const filteredTasksByDate = response.slice().sort((a,b) =>{
           return new Date(b.created_at) - new Date(a.created_at);
         })
+        console.log(filteredTasksByDate)
 
           setTaskData(filteredTasksByDate);
           // setError("");
+          console.log("taskData", taskData)
 
         }
       }catch(error){
@@ -46,8 +47,8 @@ function Tasks() {
   }, [])
 
   const openTasks = taskData.filter((task) => task.completed === false || task.completed === null  )
-// console.log("tasks", taskData)
-// console.log("open tasks", openTasks)
+console.log("tasks", taskData)
+console.log("open tasks", openTasks)
 return (
 
 <section className="container mx-auto px-8 py-8 lg:py-10 ">

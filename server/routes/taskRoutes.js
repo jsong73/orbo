@@ -39,7 +39,7 @@ router.get("/", verifyToken, async (req, res) => {
         }
 
         res.json(tasks.rows)
-
+console.log(tasks)
 
     }catch(error){
         console.log(error)
