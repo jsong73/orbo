@@ -9,7 +9,7 @@ router.post("/", verifyToken, async (req, res) => {
         const { title, description, completed, category, due_date, priority } = req.body;
     
         const userId = req.user.userId;
-        console.log("userid", userId)
+        // console.log("userid", userId)
 
         const newTask = await pool.query(
         "INSERT INTO tasks(user_id, title, description, completed, category, due_date, priority) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
