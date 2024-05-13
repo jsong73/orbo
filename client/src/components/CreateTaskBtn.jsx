@@ -8,7 +8,7 @@ function CreateTaskBtn() {
 
   const handleClick = () => {
     setModal(true)
-    console.log("opened?", showModal)
+    // console.log("opened?", showModal)
 
   }
   
