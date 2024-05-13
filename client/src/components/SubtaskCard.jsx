@@ -89,28 +89,34 @@ const onDragEnd = async (result) => {
   }
 
   const originalColumn = source.droppableId;
+  // console.log("original column:", originalColumn);
   const destinationColumn = destination.droppableId;
+  // console.log("destination", destinationColumn)
   const subtaskId = result.draggableId;
+  // console.log("subtask ID", subtaskId)
 
   const updatedSubtasks = {
-    todo: [...todoSubtasks],
-    doing: [...doingSubtasks],
-    done: [...doneSubtasks]
+    "To Do": [...todoSubtasks],
+    "Doing": [...doingSubtasks],
+    "Done": [...doneSubtasks]
   };
 
+  // console.log("updated task:", updatedSubtasks)
+  // console.log("does this match the subtaskID?", updatedSubtasks[originalColumn])
   const movedSubtask = updatedSubtasks[originalColumn].find(subtask => subtask.id.toString() === subtaskId);
+  // console.log("moved subtask:", movedSubtask)
   const movedSubtaskIndex = updatedSubtasks[originalColumn].indexOf(movedSubtask);
   updatedSubtasks[originalColumn].splice(movedSubtaskIndex, 1);
-
+  // console.log("moved subtask index:", movedSubtaskIndex)
 
   movedSubtask.status = destinationColumn;
 
 
   updatedSubtasks[destinationColumn].push(movedSubtask);
 
-  setTodoSubtasks([...updatedSubtasks.todo]);
-  setDoingSubtasks([...updatedSubtasks.doing]);
-  setDoneSubtasks([...updatedSubtasks.done]);
+  setTodoSubtasks([...updatedSubtasks["To Do"]]);
+  setDoingSubtasks([...updatedSubtasks["Doing"]]);
+  setDoneSubtasks([...updatedSubtasks["Done"]]);
 
   const token = Auth.getToken();
   await updateSubTask(taskId, subtaskId, destinationColumn, token);
@@ -123,14 +129,13 @@ return (
 
         <div>
           <h1 className="font-semibold text-xl">To Do</h1>
-          <Droppable droppableId="todo">
+          <Droppable droppableId="To Do">
           {(provided) => ( 
           <div ref={provided.innerRef} {...provided.droppableProps}>
           <div className="bg-transparent text-gray-700 ">
             <div className="p-3 relative flex flex-col justify-end "></div>
             {todoSubtasks && todoSubtasks.map((subtask, index ) => (
               <Draggable key={subtask.id.toString()} draggableId={subtask.id.toString()} index={index}>
-        
                  {(provided) => (
                       <div
                         ref={provided.innerRef}
@@ -162,7 +167,7 @@ return (
    
         <div>
           <h1 className="font-semibold text-xl">Doing</h1>
-          <Droppable droppableId="doing">
+          <Droppable droppableId="Doing">
           {(provided) => ( 
           <div ref={provided.innerRef} {...provided.droppableProps}>
           <div className="bg-transparent text-gray-700 ">
@@ -199,7 +204,7 @@ return (
  
         <div>
           <h1 className="font-semibold text-xl">Done</h1>
-          <Droppable droppableId="done">
+          <Droppable droppableId="Done">
           {(provided) => ( 
           <div ref={provided.innerRef} {...provided.droppableProps}>
           <div className="bg-transparent text-gray-700 ">
