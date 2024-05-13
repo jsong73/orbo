@@ -1,5 +1,5 @@
 # postgres-tasks
-An application for organizing tasks and workflows. Users can create customized workflow boards to suit their specific needs and effortlessly manage tasks within each board by using the drag and drop feature.
+Orbo is an application that allows users to organize tasks and workflows. Users can create customized workflow boards to suit their specific needs and effortlessly manage tasks within each board by using the drag and drop feature.
 
 ## Technology  
 Frontend: React, Tailwind CSS  
