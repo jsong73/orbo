@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production node server/server.js",
+    "start": "node server/server.js",
     "dev": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
-    "build": "NODE_ENV=production && cd client && npm run build"
+    "build": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",

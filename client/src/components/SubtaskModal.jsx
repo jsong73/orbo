@@ -30,7 +30,7 @@ function SubtaskModal({showModal, setModal, taskId, status }) {
           
             const newSubtask = await addSubtask(taskId, { title: title, description: description, status: subtaskStatus }, token);
 
-            console.log("new subtask", newSubtask)
+            // console.log("new subtask", newSubtask)
     
             
             setTitle("");
