@@ -93,22 +93,6 @@ router.delete("/:id/subtasks/:subtaskId",  verifyToken, async (req, res) => {
     }
 })
 
-// router.get("/profile/:userId", verifyToken, async (req,res) => {
-//     try{
-//         const userId = req.params.userId
-
-//         const user = await pool.query("SELECT name, email FROM users WHERE id = $1", [userId]);
-
-//         if (user.rows.length === 0) {
-//             return res.json({ message: "User not found" });
-//         }
-
-//         res.json(user.rows[0]);
-
-//     }catch(error){
-//         console.log(error)
-//     }
-// })
 
 
 module.exports = router;
