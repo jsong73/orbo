@@ -16,8 +16,6 @@ const subtaskRoutes = require("./routes/subtaskRoutes")
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-
-
 app.use("/", userRoutes)
 app.use("/tasks", taskRoutes)
 app.use("/tasks", subtaskRoutes)

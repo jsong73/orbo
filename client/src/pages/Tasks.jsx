@@ -47,8 +47,8 @@ function Tasks() {
   }, [])
 
   const openTasks = taskData.filter((task) => task.completed === false || task.completed === null  )
-console.log("tasks", taskData)
-console.log("open tasks", openTasks)
+// console.log("tasks", taskData)
+// console.log("open tasks", openTasks)
 return (
 
 <section className="container mx-auto px-8 py-8 lg:py-10 ">

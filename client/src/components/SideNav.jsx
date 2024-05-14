@@ -3,7 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 function SideNav({ openSideNav , setOpenSideNav}) {
-    console.log("show?", openSideNav)
+    // console.log("show?", openSideNav)
 
     const handleClose = () => {
         setOpenSideNav(false)
