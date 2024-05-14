@@ -9,13 +9,13 @@ router.post("/", verifyToken, async (req, res) => {
         const { title, description, completed, category, due_date, priority } = req.body;
     
         const userId = req.user.userId;
-        console.log("userid", userId)
+        // console.log("userid", userId)
 
         const newTask = await pool.query(
         "INSERT INTO tasks(user_id, title, description, completed, category, due_date, priority) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         [userId, title, description, completed, category, due_date, priority]
         );
-        console.log("new task:", newTask.rows[0])
+        // console.log("new task:", newTask.rows[0])
         
          res.json({ message: "Task successfully created", task: newTask.rows[0]})
     }catch(error){
@@ -39,7 +39,7 @@ router.get("/", verifyToken, async (req, res) => {
         }
 
         res.json(tasks.rows)
-console.log(tasks)
+// console.log(tasks)
 
     }catch(error){
         console.log(error)
