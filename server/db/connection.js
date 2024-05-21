@@ -15,7 +15,7 @@ pool.on("connect", () => {
 
 pool.connect((err) => {
     if (err) throw err
-    console.log("Connect to PostgreSQL successfully!")
+    console.log("connected to PostgreSQL successfully")
 })
 
 module.exports = { pool };
