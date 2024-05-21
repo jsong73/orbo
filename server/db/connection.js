@@ -13,5 +13,9 @@ pool.on("connect", () => {
     console.log("connected to the task_db database");
 });
 
+pool.connect((err) => {
+    if (err) throw err
+    console.log("Connect to PostgreSQL successfully!")
+})
 
 module.exports = { pool };
