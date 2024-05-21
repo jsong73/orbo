@@ -5,7 +5,8 @@ const pool = new Pool({
     password: process.env.PASSWORD,
     host: "localhost",
     port: 5432,
-    database: "tasks_db"
+    database: "tasks_db",
+    ssl: {rejectUnauthorized: false}
 })
 
 pool.on("connect", () => {
