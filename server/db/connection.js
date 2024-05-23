@@ -3,7 +3,7 @@ const { Pool } = require("pg");
 console.log('DB Config:', {
     user: process.env.USER,
     password: process.env.PASSWORD,
-    host: "127.0.0.1",
+    host: process.env.DB_HOST,
     port: 5432,
     database: "tasks_db",
 });
@@ -14,7 +14,7 @@ const pool = new Pool({
     host: "127.0.0.1",
     port: 5432,
     database: "tasks_db",
-    ssl: {rejectUnauthorized: false}
+    // ssl: {rejectUnauthorized: false}
 })
 
 pool.on("connect", () => {
