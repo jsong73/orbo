@@ -11,7 +11,7 @@ console.log('DB Config:', {
 const pool = new Pool({
     user: process.env.USER,
     password: process.env.PASSWORD,
-    host: "0.0.0.0",
+    host: "127.0.0.1",
     port: 5432,
     database: "tasks_db",
     // ssl: {rejectUnauthorized: false}
