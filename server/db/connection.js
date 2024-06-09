@@ -1,21 +1,20 @@
 const { Pool } = require("pg");
 
-console.log('DB Config:', {
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    host: process.env.DB_HOST,
-    port: 5432,
-    database: "tasks_db",
-});
+let pool;
 
-const pool = new Pool({
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    host: "127.0.0.1",
-    port: 5432,
-    database: "tasks_db",
-    // ssl: {rejectUnauthorized: false}
-})
+if (process.env.DATABASE_URL) {
+    pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+    });
+} else {
+    pool = new Pool({
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        host: process.env.DB_HOST,
+        port: 5432,
+        database: "tasks_db",
+    });
+}
 
 pool.on("connect", () => {
     console.log("connected to the task_db database");
