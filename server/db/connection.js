@@ -4,7 +4,7 @@ let pool;
 
 if (process.env.DATABASE_URL) {
     pool = new Pool({
-        connectionString: process.env.DATABASE_URL,
+        connectionString: process.env.DB_URL,
     });
 } else {
     pool = new Pool({
